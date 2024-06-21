@@ -5,7 +5,8 @@
   /* grid-gap: 10px; */
   grid-template-areas: 
   'h h' 
-  'n m';
+  'n m'
+  'f f';
   width: 1200px;
   margin: 0 auto;
 }
@@ -31,4 +32,9 @@
 
 .main img {
   width: 100%;
+}
+
+.footer {
+  grid-area: f;
+  background-color: blue;
 }

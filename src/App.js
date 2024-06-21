@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import Footer from './components/Footer'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import Profile from './components/Profile'
@@ -10,7 +11,7 @@ const App = () => {
 			<Header />
 			<Nav />
 			<Profile />
-			<footer className='footer'></footer>
+			<Footer />
 		</div>
 	)
 }
