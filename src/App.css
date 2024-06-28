@@ -11,30 +11,14 @@
   margin: 0 auto;
 }
 
-.header {
-  grid-area: h;
-  background-color: green;
-}
 
-.nav {
-  grid-area: n;
-  background-color: aqua;
-}
 
 .main {
   grid-area: m;
   background-color: red;
 }
 
-.header img {
-  width: 20px;
-}
 
 .main img {
   width: 100%;
-}
-
-.footer {
-  grid-area: f;
-  background-color: blue;
 }
