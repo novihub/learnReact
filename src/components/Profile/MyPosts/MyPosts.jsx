@@ -1,9 +1,9 @@
 import React from 'react'
 
-import classes from './Post.module.css'
+import classes from './MyPosts.module.css'
+import Post from './Post/Post'
 
-
-const Post = () => {
+const MyPosts = () => {
 	return (
 		<>
 			<div>
@@ -11,13 +11,16 @@ const Post = () => {
 				<button>Add post</button>
 			</div>
 			<div className={classes.posts}>
-				<Post />
+				<Post message='First'/>
+				<Post message='Second'/>
+				<Post message='Third'/>
+				<Post message='Fourth'/>
 			</div>
 		</>
 	)
 }
 
-export default Post
+export default MyPosts
 
 
 

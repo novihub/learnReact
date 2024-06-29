@@ -1,5 +1,5 @@
 import React from 'react'
-import Post from './MyPosts/Post/Post'
+import MyPosts from './MyPosts/MyPosts'
 import classes from './Profile.module.css'
 
 const Profile = () => {
@@ -11,9 +11,7 @@ const Profile = () => {
 					alt=' '
 				/>
 			</div>
-			<Post />
-			<Post />
-			<Post />
+			<MyPosts />
 		</main>
 	)
 }
