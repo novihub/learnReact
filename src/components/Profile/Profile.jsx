@@ -1,20 +1,19 @@
 import React from 'react'
-import './Profile.module.css'
+import Post from './MyPosts/Post/Post'
+import classes from './Profile.module.css'
 
 const Profile = () => {
 	return (
-		<main className='main'>
+		<main className={classes.main}>
 			<div>
 				<img
 					src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNCAhmYPPtqEFzGVd3YzV0K9biTLO0PDbQw&s'
 					alt=' '
 				/>
 			</div>
-			<div>
-				<li>
-					
-				</li>
-			</div>
+			<Post />
+			<Post />
+			<Post />
 		</main>
 	)
 }

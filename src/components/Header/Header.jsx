@@ -1,9 +1,9 @@
 import React from 'react'
-import './Header.module.css'
+import classes from './Header.module.css'
 
 const Header = () => {
 	return (
-		<header className='header'>
+		<header className={classes.header}>
 			<img
 				src='https://img.freepik.com/free-vector/gradient-hummingbird-logo-design_23-2149923912.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716940800&semt=ais_user'
 				alt=' '
