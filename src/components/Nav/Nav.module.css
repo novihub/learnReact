@@ -1,4 +1,22 @@
 .nav {
-  grid-area: n;
-  background-color: aqua;
+	grid-area: n;
+	background-color: aqua;
+}
+
+.nav ul {
+	margin: 0;
+	padding: 0;
+	padding-left: 10px;
+}
+
+.item {
+	color: aliceblue;
+	text-decoration: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.item a.active {
+  color: gold;
 }
