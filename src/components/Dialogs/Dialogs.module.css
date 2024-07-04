@@ -1,16 +1,22 @@
 /* Dialogs.module.css */
 .dialogs {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
+	display: grid;
+	grid-template-columns: 2fr 10fr;
 }
 
 .dialogItems {
-  /* Уберите пробел между .dialogItems и .dialog */
-  padding: 10px;
+	/* Уберите пробел между .dialogItems и .dialog */
+	padding: 10px;
 }
 
-.dialogItems .dialog {
-  padding: 10px;
+.dialog a {
+	padding: 10px;
+	color: white;
+  text-decoration: none;
+}
+
+.dialog a:hover {
+  color: gold;
 }
 
 /* Уберите этот блок стилей */
@@ -19,9 +25,9 @@
 }*/
 
 .messages {
-  padding: 10px;
+	padding: 10px;
 }
 
 .messages .message {
-  /* Добавьте стили для сообщений, если необходимо */
+	color: white;
 }
