@@ -5,7 +5,7 @@ import Post from './Post/Post'
 
 const MyPosts = () => {
 	return (
-		<>
+		<div className={classes.postsBlock}>
 			<div>
 				<textarea name="" id=""></textarea>
 				<button>Add post</button>
@@ -16,7 +16,7 @@ const MyPosts = () => {
 				<Post message='Third'/>
 				<Post message='Fourth'/>
 			</div>
-		</>
+		</div>
 	)
 }
 
