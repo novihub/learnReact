@@ -1,3 +1,27 @@
-.content {
-	grid-area: c;
+/* Dialogs.module.css */
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+
+.dialogItems {
+  /* Уберите пробел между .dialogItems и .dialog */
+  padding: 10px;
+}
+
+.dialogItems .dialog {
+  padding: 10px;
+}
+
+/* Уберите этот блок стилей */
+/*.dialogItems .active {
+  color: gold;
+}*/
+
+.messages {
+  padding: 10px;
+}
+
+.messages .message {
+  /* Добавьте стили для сообщений, если необходимо */
 }
