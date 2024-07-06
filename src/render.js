@@ -5,6 +5,8 @@ import App from './App'
 import './index.css'
 import { addPost } from './redux/state'
 import { updateNewPostText } from './redux/state'
+import { addMessage } from './redux/state'
+import { updateNewMessage } from './redux/state'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -12,7 +14,7 @@ export let rerenderEntireTree = (state) => {
 	root.render(
 		<React.StrictMode>
 			<BrowserRouter>
-				<App state={state} addPost={addPost} updateNewPostText={updateNewPostText} />
+				<App state={state} addPost={addPost} updateNewPostText={updateNewPostText} addMessage={addMessage} updateNewMessage={updateNewMessage}/>
 			</BrowserRouter>
 		</React.StrictMode>
 	)
