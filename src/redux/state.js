@@ -1,7 +1,7 @@
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
+import dialogsReducer from './dialogs-reducer'
+import profileReducer from './profile-reducer'
+import sidebarReducer from './sidebar-reducer'
+
 
 const store = {
 	_state: {
@@ -31,7 +31,8 @@ const store = {
 				{ id: 5, message: 'Whats up' }
 			],
 			newMessageText: 'text me'
-		}
+		},
+		sidebar: {}
 	},
 	getState() {
 		return this._state
@@ -43,66 +44,15 @@ const store = {
 		this._callSubscriber = observer
 	},
 
-	_addPost() {
-		let newPost = {
-			id: this._state.profilePage.posts.length + 1,
-			message: this._state.profilePage.newPostText,
-			likesCount: 0
-		}
-
-		this._state.profilePage.posts.push(newPost)
-		this._state.profilePage.newPostText = ''
-		this._callSubscriber(this._state)
-	},
-	_updateNewPostText(newPostText) {
-		this._state.profilePage.newPostText = newPostText
-		this._callSubscriber(this._state)
-	},
-	_addMessage() {
-		let newMessage = {
-			id: this._state.dialogsPage.messages.length + 1,
-			message: this._state.dialogsPage.newMessageText
-		}
-
-		this._state.dialogsPage.messages.push(newMessage)
-		this._state.dialogsPage.newMessageText = ''
-		this._callSubscriber(this._state)
-	},
-	_updateNewMessage(newMessageText) {
-		this._state.dialogsPage.newMessageText = newMessageText
-		this._callSubscriber(this._state)
-	},
-
 	dispatch(action) {
-		// { type: 'ADD-POST'}
-		if (action.type === ADD_POST) {
-			this._addPost()
-		} else if (action.type === UPDATE_NEW_POST_TEXT) {
-			this._updateNewPostText(action.newPostText)
-		} else if (action.type === ADD_MESSAGE) {
-			this._addMessage()
-		} else if (action.type === UPDATE_NEW_MESSAGE) {
-			this._updateNewMessage(action.newMessageText)
-		}
+		this._state.profilePage = profileReducer(this._state.profilePage, action)
+		this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+		this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+		this._callSubscriber(this._state)
 	}
 }
 
-export const addPostActionCreator = () => ({
-	type: ADD_POST
-})
 
-export const updateNewPostTextActionCreator = newPostText => ({
-	type: UPDATE_NEW_POST_TEXT,
-	newPostText: newPostText
-})
 
-export const addMessageActionCreator = () => ({
-	type: ADD_MESSAGE
-})
-
-export const updateNewMessageActionCreator = newPostText => ({
-	type: UPDATE_NEW_MESSAGE,
-	newMessageText: newPostText
-})
 
 export default store
