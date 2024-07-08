@@ -13,23 +13,31 @@ const Dialogs = props => {
 	))
 
 	const addMessage = () => {
-		props.addMessage()
+		// props.addMessage()
+		props.dispatch({ type: 'ADD-MESSAGE' })
 	}
 
 	const typedTextRef = React.createRef()
 
 	const updateNewMessage = () => {
-		props.updateNewMessage(typedTextRef.current.value)
+		let message = typedTextRef.current.value
+		props.dispatch({ type: 'UPDATE-NEW-MESSAGE', newMessage: message })
+		// props.updateNewMessage(typedTextRef.current.value)
 	}
-
 
 	return (
 		<div className={classes.Dialogs}>
 			<div>{getDialogs}</div>
-			<div>{getMessages}</div>
 			<div>
-				<textarea onChange={updateNewMessage} ref={typedTextRef} value={props.dialogsPage.newMessage}></textarea>
-				<button onClick={addMessage}></button>
+				{getMessages}
+				<div>
+					<textarea
+						onChange={updateNewMessage}
+						ref={typedTextRef}
+						value={props.dialogsPage.newMessage}
+					></textarea>
+					<button onClick={addMessage}>Enter</button>
+				</div>
 			</div>
 		</div>
 	)

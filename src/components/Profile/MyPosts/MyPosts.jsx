@@ -11,11 +11,14 @@ const MyPosts = props => {
 	const typedTextRef = React.createRef()
 
 	const addPost = () => {
-		props.addPost()
+		// props.addPost()
+		props.dispatch({ type: 'ADD-POST'})
 	}
 
 	const updateNewPostText = () => {
-		props.updateNewPostText(typedTextRef.current.value)
+		// props.updateNewPostText(typedTextRef.current.value)
+		let newPostText = typedTextRef.current.value
+		props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newPostText: newPostText })
 	}
 
 	return (

@@ -31,13 +31,14 @@ const store = {
 	getState() {
 		return this._state
 	},
-	subscriber(observer) {
-		this._callSubscriber = observer
-	},
 	_callSubscriber(_state) {
 		console.log('Rerendered')
 	},
-	addPost() {
+	subscriber(observer) {
+		this._callSubscriber = observer
+	},
+
+	_addPost() {
 		let newPost = {
 			id: this._state.profilePage.posts.length + 1,
 			message: this._state.profilePage.newPostText,
@@ -45,25 +46,40 @@ const store = {
 		}
 
 		this._state.profilePage.posts.push(newPost)
+		this._state.profilePage.newPostText = ''
 		this._callSubscriber(this._state)
 	},
-	updateNewPostText(newPostText) {
+	_updateNewPostText(newPostText) {
 		this._state.profilePage.newPostText = newPostText
 		this._callSubscriber(this._state)
 	},
-	addMessage() {
+	_addMessage() {
 		let newMessage = {
 			id: this._state.dialogsPage.messages.length + 1,
 			message: this._state.dialogsPage.newMessage
 		}
 
 		this._state.dialogsPage.messages.push(newMessage)
+		this._state.dialogsPage.newMessage = ''
 		this._callSubscriber(this._state)
 	},
-	updateNewMessage(newMessage) {
+	_updateNewMessage(newMessage) {
 		this._state.dialogsPage.newMessage = newMessage
 		this._callSubscriber(this._state)
-	}
+	},
+
+	dispatch(action) {
+		// { type: 'ADD-POST'}
+		if (action.type === 'ADD-POST') {
+			this._addPost()
+		} else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+			this._updateNewPostText(action.newPostText)
+		} else if (action.type === 'ADD-MESSAGE') {
+			this._addMessage()
+		} else if (action.type === 'UPDATE-NEW-MESSAGE') {
+			this._updateNewMessage(action.newMessage)
+		}
+	} 
 }
 
 export default store
