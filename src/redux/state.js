@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
+
 const store = {
 	_state: {
 		profilePage: {
@@ -25,7 +30,7 @@ const store = {
 				{ id: 4, message: 'Where are you from' },
 				{ id: 5, message: 'Whats up' }
 			],
-			newMessage: 'text me'
+			newMessageText: 'text me'
 		}
 	},
 	getState() {
@@ -56,30 +61,48 @@ const store = {
 	_addMessage() {
 		let newMessage = {
 			id: this._state.dialogsPage.messages.length + 1,
-			message: this._state.dialogsPage.newMessage
+			message: this._state.dialogsPage.newMessageText
 		}
 
 		this._state.dialogsPage.messages.push(newMessage)
-		this._state.dialogsPage.newMessage = ''
+		this._state.dialogsPage.newMessageText = ''
 		this._callSubscriber(this._state)
 	},
-	_updateNewMessage(newMessage) {
-		this._state.dialogsPage.newMessage = newMessage
+	_updateNewMessage(newMessageText) {
+		this._state.dialogsPage.newMessageText = newMessageText
 		this._callSubscriber(this._state)
 	},
 
 	dispatch(action) {
 		// { type: 'ADD-POST'}
-		if (action.type === 'ADD-POST') {
+		if (action.type === ADD_POST) {
 			this._addPost()
-		} else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+		} else if (action.type === UPDATE_NEW_POST_TEXT) {
 			this._updateNewPostText(action.newPostText)
-		} else if (action.type === 'ADD-MESSAGE') {
+		} else if (action.type === ADD_MESSAGE) {
 			this._addMessage()
-		} else if (action.type === 'UPDATE-NEW-MESSAGE') {
-			this._updateNewMessage(action.newMessage)
+		} else if (action.type === UPDATE_NEW_MESSAGE) {
+			this._updateNewMessage(action.newMessageText)
 		}
-	} 
+	}
 }
+
+export const addPostActionCreator = () => ({
+	type: ADD_POST
+})
+
+export const updateNewPostTextActionCreator = newPostText => ({
+	type: UPDATE_NEW_POST_TEXT,
+	newPostText: newPostText
+})
+
+export const addMessageActionCreator = () => ({
+	type: ADD_MESSAGE
+})
+
+export const updateNewMessageActionCreator = newPostText => ({
+	type: UPDATE_NEW_MESSAGE,
+	newMessageText: newPostText
+})
 
 export default store
