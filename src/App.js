@@ -8,6 +8,7 @@ import Profile from './components/Profile/Profile'
 import { Route, Routes } from 'react-router-dom'
 
 const App = props => {
+	debugger
 	return (
 		<div className={classes.App}>
 			<Header />
