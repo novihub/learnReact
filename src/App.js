@@ -1,6 +1,5 @@
-// App.js
 import React from 'react'
-import './App.css'
+import classes from './App.module.css'
 import Dialogs from './components/Dialogs/Dialogs'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
@@ -10,10 +9,10 @@ import { Route, Routes } from 'react-router-dom'
 
 const App = props => {
 	return (
-		<div className='app-wrapper'>
+		<div className={classes.App}>
 			<Header />
 			<Nav />
-			<div className='app-wrapper-content'>
+			<div className={classes.AppContent}>
 				<Routes>
 					<Route
 						path='/profile'
@@ -31,7 +30,7 @@ const App = props => {
 							<Dialogs
 								dialogsPage={props.state.dialogsPage}
 								addMessage={props.addMessage}
-								updateNewMessage={props.updateNewMessage}
+                updateNewMessage={props.updateNewMessage}
 							/>
 						}
 					/>

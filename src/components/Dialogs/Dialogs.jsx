@@ -1,40 +1,35 @@
 import React from 'react'
-
-import DialogItem from './DialogItem/DialogsItem'
+import Dialog from './Dialog/Dialog'
 import classes from './Dialogs.module.css'
 import Message from './Message/Message'
 
 const Dialogs = props => {
-	let dialogsElements = props.dialogsPage.dialogs.map(dialog => (
-		<DialogItem name={dialog.name} id={dialog.id} />
+	const getDialogs = props.dialogsPage.dialogs.map(d => (
+		<Dialog id={d.id} name={d.name} />
 	))
 
-	let messagesElements = props.dialogsPage.messages.map(m => (
-		<Message message={m.message} />
+	const getMessages = props.dialogsPage.messages.map(m => (
+		<Message id={m.id} message={m.message} />
 	))
 
-	let typedTextRef = React.createRef()
-
-	let addMessage = () => {
+	const addMessage = () => {
 		props.addMessage()
 	}
 
-	let onMessageChange = () => {
-		let myMessage = typedTextRef.current.value
-		props.updateNewMessage(myMessage)
+	const typedTextRef = React.createRef()
+
+	const updateNewMessage = () => {
+		props.updateNewMessage(typedTextRef.current.value)
 	}
 
+
 	return (
-		<div className={classes.dialogs}>
-			<div className={classes.dialogItems}>{dialogsElements}</div>
-			<div className={classes.messages}>{messagesElements}</div>
+		<div className={classes.Dialogs}>
+			<div>{getDialogs}</div>
+			<div>{getMessages}</div>
 			<div>
-				<textarea
-					onChange={onMessageChange}
-					ref={typedTextRef}
-					value={props.dialogsPage.newMessage}
-				/>
-				<button onClick={addMessage}>Enter</button>
+				<textarea onChange={updateNewMessage} ref={typedTextRef} value={props.dialogsPage.newMessage}></textarea>
+				<button onClick={addMessage}></button>
 			</div>
 		</div>
 	)

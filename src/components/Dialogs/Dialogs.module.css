@@ -1,33 +1,6 @@
-/* Dialogs.module.css */
-.dialogs {
+.Dialogs {
+	background-color: violet;
 	display: grid;
-	grid-template-columns: 2fr 10fr;
-}
-
-.dialogItems {
-	/* Уберите пробел между .dialogItems и .dialog */
+	grid-template-columns: 1fr 5fr;
 	padding: 10px;
-}
-
-.dialog a {
-	padding: 10px;
-	color: white;
-  text-decoration: none;
-}
-
-.dialog a:hover {
-  color: gold;
-}
-
-/* Уберите этот блок стилей */
-/*.dialogItems .active {
-  color: gold;
-}*/
-
-.messages {
-	padding: 10px;
-}
-
-.messages .message {
-	color: white;
 }

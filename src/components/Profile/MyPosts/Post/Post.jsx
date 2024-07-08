@@ -1,22 +1,18 @@
 import React from 'react'
-
 import classes from './Post.module.css'
 
 const Post = props => {
 	return (
-		<>
-			<div className={classes.item}>
+		<div className={classes.Post}>
+			<div>{props.message}</div>
+			<div>
 				<img
-					src='https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg'
-					alt=''
+					src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGWEwXpRS7z7rVaGrjIWWTdE8_TiYTGiYjA&s'
+					alt='IMG'
 				/>
-				{props.message}
-				<div>
-					<span>like</span>
-					{props.likesCount}
-				</div>
+				<div>like {props.likesCount}</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

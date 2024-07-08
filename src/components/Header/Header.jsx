@@ -1,13 +1,10 @@
-import React from 'react'
+import React from 'react';
 import classes from './Header.module.css'
 
-const Header = () => {
+const Header = props => {
 	return (
-		<header className={classes.header}>
-			<img
-				src='https://img.freepik.com/free-vector/gradient-hummingbird-logo-design_23-2149923912.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716940800&semt=ais_user'
-				alt=' '
-			/>
+		<header className={classes.Header}>
+			There is a Header
 		</header>
 	)
 }
