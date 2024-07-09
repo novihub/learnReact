@@ -8,24 +8,13 @@ import Profile from './components/Profile/Profile'
 import { Route, Routes } from 'react-router-dom'
 
 const App = props => {
-	debugger
 	return (
 		<div className={classes.App}>
 			<Header />
 			<Nav />
 			<div className={classes.AppContent}>
 				<Routes>
-					<Route
-						path='/profile'
-						element={
-							<Profile
-								profilePage={props.state.profilePage}
-								dispatch={props.dispatch}
-								// addPost={props.addPost}
-								// updateNewPostText={props.updateNewPostText}
-							/>
-						}
-					/>
+					<Route path='/profile' element={<Profile store={props.store}/>} />
 					<Route
 						path='/messages/*'
 						element={

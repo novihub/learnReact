@@ -11,11 +11,11 @@ import store from './redux/redux-store'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 export const rerenderEntireTree = state => {
-	debugger
 	root.render(
 		<React.StrictMode>
 			<BrowserRouter>
 				<App
+					store={store}
 					state={state}
 					dispatch={store.dispatch.bind(store)}
 					// addPost={store.addPost.bind(store)}
