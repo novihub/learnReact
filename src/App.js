@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './App.module.css'
-import Dialogs from './components/Dialogs/Dialogs'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
 import Profile from './components/Profile/Profile'
 
 import { Route, Routes } from 'react-router-dom'
+import DialogsContainer from './components/Dialogs/DialogsContainer'
 
 const App = props => {
 	return (
@@ -14,17 +14,10 @@ const App = props => {
 			<Nav />
 			<div className={classes.AppContent}>
 				<Routes>
-					<Route path='/profile' element={<Profile store={props.store}/>} />
+					<Route path='/profile' element={<Profile store={props.store} />} />
 					<Route
 						path='/messages/*'
-						element={
-							<Dialogs
-								dialogsPage={props.state.dialogsPage}
-								dispatch={props.dispatch}
-								// addMessage={props.addMessage}
-								// updateNewMessage={props.updateNewMessage}
-							/>
-						}
+						element={<DialogsContainer store={props.store} />}
 					/>
 				</Routes>
 			</div>
