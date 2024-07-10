@@ -1,4 +1,5 @@
 import React from 'react'
+import StoreContext from '../../../StoreContext'
 
 import {
 	addPostActionCreator,
@@ -7,24 +8,28 @@ import {
 import MyPosts from './MyPosts'
 
 const MyPostsContainer = props => {
-	debugger
-	let state = props.store.getState()
-
-	const onAddPost = () => {
-		props.store.dispatch(addPostActionCreator())
-	}
-
-	const updateNewPostText = newPostText => {
-		props.store.dispatch(updateNewPostTextActionCreator(newPostText))
-	}
-
 	return (
-		<MyPosts
-			addPost={onAddPost}
-			updateNewPostText={updateNewPostText}
-			posts={state.profilePage.posts}
-			newPostText={state.profilePage.newPostText}
-		/>
+		<StoreContext.Consumer>
+			{store => {
+				let state = store.getState()
+
+				const onAddPost = () => {
+					store.dispatch(addPostActionCreator())
+				}
+
+				const updateNewPostText = newPostText => {
+					store.dispatch(updateNewPostTextActionCreator(newPostText))
+				}
+				return (
+					<MyPosts
+						addPost={onAddPost}
+						updateNewPostText={updateNewPostText}
+						posts={state.profilePage.posts}
+						newPostText={state.profilePage.newPostText}
+					/>
+				)
+			}}
+		</StoreContext.Consumer>
 	)
 }
 
