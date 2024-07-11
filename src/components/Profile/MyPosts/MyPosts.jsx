@@ -8,7 +8,7 @@ import Post from './Post/Post'
 
 const MyPosts = props => {
 	const getPosts = props.posts.map(p => (
-		<Post id={p.id} message={p.message} likesCount={p.likesCount} />
+		<Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />
 	))
 
 	const typedTextRef = React.createRef()
