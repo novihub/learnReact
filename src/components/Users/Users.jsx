@@ -1,37 +1,15 @@
+import axios from 'axios'
 import React from 'react'
 import classes from './Users.module.css'
+import userPhoto from '../../assets/images/user.png'
 
 const Users = props => {
 	if (props.users.length === 0) {
-		props.setUsers([
-			{
-				id: 1,
-				photoUrl:
-					'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-				followed: true,
-				fullName: 'Novikov Maxim',
-				status: 'I am a boss',
-				location: { city: 'Pavlodar', country: 'Kazahkstan' }
-			},
-			{
-				id: 2,
-				photoUrl:
-					'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-				followed: true,
-				fullName: 'Novikov Maxim',
-				status: 'I am a web boss',
-				location: { city: 'Pavlodar', country: 'Kazahkstan' }
-			},
-			{
-				id: 3,
-				photoUrl:
-					'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-				followed: false,
-				fullName: 'Novikov Maxim',
-				status: 'I am a full boss',
-				location: { city: 'Pavlodar', country: 'Kazahkstan' }
-			}
-		])
+		axios
+			.get('https://social-network.samuraijs.com/api/1.0/users')
+			.then(res => {
+				props.setUsers(res.data.items)
+			})
 	}
 
 	return (
@@ -39,7 +17,7 @@ const Users = props => {
 			{props.users.map(u => (
 				<div key={u.id}>
 					<div className=''>
-						<img src={u.photoUrl} alt='avatar' />
+						<img src={u.photos.small != null ? u.photos.image : userPhoto} alt='avatar' />
 						{u.followed ? (
 							<button onClick={() => props.follow(u.id)}>Unfollow</button>
 						) : (
@@ -47,11 +25,11 @@ const Users = props => {
 						)}
 					</div>
 					<div className=''>
-						<h3>{u.fullName}</h3>
+						<h3>{u.name}</h3>
 						<h5>{u.status}</h5>
 						<div>
-							<p>{u.location.country}</p>
-							<p>{u.location.city}</p>
+							<p>{'u.location.country'}</p>
+							<p>{'u.location.city'}</p>
 						</div>
 					</div>
 				</div>
