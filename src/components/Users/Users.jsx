@@ -1,23 +1,28 @@
 import axios from 'axios'
 import React from 'react'
-import classes from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
+import classes from './Users.module.css'
 
 const Users = props => {
-	if (props.users.length === 0) {
-		axios
-			.get('https://social-network.samuraijs.com/api/1.0/users')
-			.then(res => {
-				props.setUsers(res.data.items)
-			})
+	let getUsers = () => {
+		if (props.users.length === 0) {
+			axios
+				.get('https://social-network.samuraijs.com/api/1.0/users')
+				.then(res => {
+					props.setUsers(res.data.items)
+				})
+		}
 	}
-
 	return (
 		<div className={classes.Users}>
+			<button onClick={getUsers}>Get users</button>
 			{props.users.map(u => (
 				<div key={u.id}>
 					<div className=''>
-						<img src={u.photos.small != null ? u.photos.image : userPhoto} alt='avatar' />
+						<img
+							src={u.photos.small != null ? u.photos.image : userPhoto}
+							alt='avatar'
+						/>
 						{u.followed ? (
 							<button onClick={() => props.follow(u.id)}>Unfollow</button>
 						) : (
