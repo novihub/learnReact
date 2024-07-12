@@ -1,3 +1,14 @@
+.Users {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.User {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .Users img {
 	height: 80px;
 	width: 80px;
