@@ -48,7 +48,7 @@ const usersReducer = (state = initialState, action) => {
 			}
 
 		case UNFOLLOW:
-			return {
+			return {	
 				...state,
 				users: state.users.map(u => {
 					if (u.id === action.userId) {

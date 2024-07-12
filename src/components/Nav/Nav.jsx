@@ -9,7 +9,8 @@ const Nav = props => {
 			<ul>
 				<li className={classes.NavItem}><NavLink to='/profile'>Profile</NavLink></li>
 				<li className={classes.NavItem}><NavLink to='/messages'>Messages</NavLink></li>
-				<li className={classes.NavItem}><NavLink to=''>Music</NavLink></li>
+				<li className={classes.NavItem}><NavLink to='/users'>Users</NavLink></li>
+				<li className={classes.NavItem}><NavLink to='/music'>Music</NavLink></li>
 				<li className={classes.NavItem}><NavLink to=''>News</NavLink></li>
 				<li className={classes.NavItem}><NavLink to=''>Settings</NavLink></li>
 			</ul>

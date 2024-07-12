@@ -38,40 +38,22 @@ const Users = props => {
 		<div className={classes.Users}>
 			{props.users.map(u => (
 				<div key={u.id}>
-					<span>
+					<div className=''>
+						<img src={u.photoUrl} alt='avatar' />
+						{u.followed ? (
+							<button onClick={() => props.follow(u.id)}>Unfollow</button>
+						) : (
+							<button onClick={() => props.unfollow(u.id)}>Follow</button>
+						)}
+					</div>
+					<div className=''>
+						<h3>{u.fullName}</h3>
+						<h5>{u.status}</h5>
 						<div>
-							<img src={u.photoUrl} alt='avatar' />
+							<p>{u.location.country}</p>
+							<p>{u.location.city}</p>
 						</div>
-						<div>
-							{u.followed ? (
-								<button
-									onClick={() => {
-										props.follow(u.id)
-									}}
-								>
-									Unfollow
-								</button>
-							) : (
-								<button
-									onClick={() => {
-										props.unfollow(u.id)
-									}}
-								>
-									Follow
-								</button>
-							)}
-						</div>
-					</span>
-					<span>
-						<span>
-							<div>{u.fullName}</div>
-							<div>{u.status}</div>
-						</span>
-						<span>
-							<div>{u.location.country}</div>
-							<div>{u.location.city}</div>
-						</span>
-					</span>
+					</div>
 				</div>
 			))}
 		</div>
