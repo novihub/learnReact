@@ -1,29 +1,27 @@
-import React from 'react'
 import { connect } from 'react-redux'
 
-import Users from './Users'
 import { followAC, setUsersAC, unfollowAC } from '../../redux/users-reducer'
+import Users from './Users'
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
 	return {
 		users: state.usersPage.users
 	}
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = dispatch => {
 	return {
-		follow: (userId) => {
+		follow: userId => {
 			dispatch(followAC(userId))
 		},
-		unfollow: (userId) => {
+		unfollow: userId => {
 			dispatch(unfollowAC(userId))
 		},
-		setUsers: (users) => {
+		setUsers: users => {
 			dispatch(setUsersAC(users))
 		}
 	}
 }
-
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
 
