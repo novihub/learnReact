@@ -32,13 +32,18 @@ class Users extends React.Component {
 		let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 
 		for (let i = 1; i <= pagesCount; i++) {
-			if (pages.length < 10) pages.push(i)
+			pages.push(i)
 		}
+
+		let curP = this.props.currentPage
+		let curPF = curP - 5 < 0 ? 0 : curP - 5
+		let curPL = curP + 5
+		let slicedPages = pages.slice(curPF, curPL)
 
 		return (
 			<>
 				<div>
-					{pages.map(p => {
+					{slicedPages.map(p => {
 						return (
 							<span
 								onClick={event => {
@@ -46,7 +51,7 @@ class Users extends React.Component {
 								}}
 								className={this.props.currentPage === p && classes.selectedPage}
 							>
-								{p}
+								{p + ' '}
 							</span>
 						)
 					})}
