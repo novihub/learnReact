@@ -14,3 +14,7 @@
 	width: 80px;
 	border-radius: 80px;
 }
+
+.selectedPage {
+	font-weight: bold;
+}
