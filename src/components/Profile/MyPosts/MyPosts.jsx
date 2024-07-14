@@ -3,9 +3,6 @@ import classes from './MyPosts.module.css'
 
 import Post from './Post/Post'
 
-
-
-
 const MyPosts = props => {
 	const getPosts = props.posts.map(p => (
 		<Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />

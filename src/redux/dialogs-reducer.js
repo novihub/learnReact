@@ -48,6 +48,4 @@ export const updateNewMessageActionCreator = newMessageText => ({
 	newMessageText: newMessageText
 })
 
-
-
 export default dialogsReducer
