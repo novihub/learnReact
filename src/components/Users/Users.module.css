@@ -18,3 +18,10 @@
 .selectedPage {
 	font-weight: bold;
 }
+
+.PageNumbers {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}

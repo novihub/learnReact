@@ -1,6 +1,6 @@
 import React from 'react'
-import classes from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
+import classes from './Users.module.css'
 
 const Users = props => {
 	let pages = []
@@ -18,20 +18,6 @@ const Users = props => {
 
 	return (
 		<>
-			<div>
-				{slicedPages.map(p => {
-					return (
-						<span
-							onClick={event => {
-								props.onPageChanged(p)
-							}}
-							className={props.currentPage === p && classes.selectedPage}
-						>
-							{p + ' '}
-						</span>
-					)
-				})}
-			</div>
 			<div className={classes.Users}>
 				{props.users.map(u => (
 					<div key={u.id} className={classes.User}>
@@ -42,13 +28,9 @@ const Users = props => {
 							/>
 							<div>
 								{u.followed ? (
-									<button onClick={() => props.follow(u.id)}>
-										Unfollow
-									</button>
+									<button onClick={() => props.follow(u.id)}>Unfollow</button>
 								) : (
-									<button onClick={() => props.unfollow(u.id)}>
-										Follow
-									</button>
+									<button onClick={() => props.unfollow(u.id)}>Follow</button>
 								)}
 							</div>
 						</div>
@@ -62,6 +44,20 @@ const Users = props => {
 						</div>
 					</div>
 				))}
+			</div>
+			<div className={classes.PageNumbers}>
+				{slicedPages.map(p => {
+					return (
+						<span
+							onClick={event => {
+								props.onPageChanged(p)
+							}}
+							className={props.currentPage === p && classes.selectedPage}
+						>
+							{p}
+						</span>
+					)
+				})}
 			</div>
 		</>
 	)
