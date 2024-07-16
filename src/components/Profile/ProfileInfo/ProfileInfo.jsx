@@ -1,16 +1,28 @@
 import React from 'react'
 import classes from './ProfileInfo.module.css'
+import Preloader from '../../common/Preloader/Preloader'
 
 const ProfileInfo = props => {
+	if (!props.profile) {
+		return <Preloader />
+	}
+
 	return (
-		<div className={classes.ProfileInfo}>
-			<div>
+		<div className={classes.Profile}>
 				<img
-					src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s'
+					src={props.profile.photos.large}
 					alt='IMG'
 				/>
-			Description
-			</div>
+				<div className={classes.ProfileInfo}>
+					<p>{'Status: ' + props.profile.aboutMe}</p>
+					<h5>Contacts: </h5>
+					<p>{'facebook: ' + props.profile.contacts.facebook}</p>
+					<p>{'vk: ' + props.profile.contacts.vk}</p>
+					<p>{'twitter: ' + props.profile.contacts.twitter}</p>
+					<p>{'instagram: ' + props.profile.contacts.instagram}</p>
+					<p>{'youtube: ' + props.profile.contacts.youtube}</p>
+					<p>{'github: ' + props.profile.contacts.github}</p>
+				</div>
 		</div>	
 	)
 }

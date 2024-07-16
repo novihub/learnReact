@@ -1,17 +1,16 @@
 import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
-import preloader from '../../assets/loading.svg'
 import {
-	followAC,
-	setCurrentPageAC,
-	setTotalUsersCountAC,
-	setUsersAC,
-	toggleIsFetchingAC,
-	unfollowAC
+	follow,
+	setCurrentPage,
+	setTotalUsersCount,
+	setUsers,
+	toggleIsFetching,
+	unfollow
 } from '../../redux/users-reducer'
-import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
+import Users from './Users'
 
 class UsersContainer extends React.Component {
 	componentDidMount() {
@@ -71,27 +70,34 @@ let mapStateToProps = state => {
 	}
 }
 
-let mapDispatchToProps = dispatch => {
-	return {
-		follow: userID => {
-			dispatch(followAC(userID))
-		},
-		unfollow: userID => {
-			dispatch(unfollowAC(userID))
-		},
-		setUsers: users => {
-			dispatch(setUsersAC(users))
-		},
-		setCurrentPage: pageNumber => {
-			dispatch(setCurrentPageAC(pageNumber))
-		},
-		setTotalUsersCount: totalCount => {
-			dispatch(setTotalUsersCountAC(totalCount))
-		},
-		toggleIsFetching: isFetching => {
-			dispatch(toggleIsFetchingAC(isFetching))
-		}
-	}
-}
+// let mapDispatchToProps = dispatch => {
+// 	return {
+// 		follow: userID => {
+// 			dispatch(followAC(userID))
+// 		},
+// 		unfollow: userID => {
+// 			dispatch(unfollowAC(userID))
+// 		},
+// 		setUsers: users => {
+// 			dispatch(setUsersAC(users))
+// 		},
+// 		setCurrentPage: pageNumber => {
+// 			dispatch(setCurrentPageAC(pageNumber))
+// 		},
+// 		setTotalUsersCount: totalCount => {
+// 			dispatch(setTotalUsersCountAC(totalCount))
+// 		},
+// 		toggleIsFetching: isFetching => {
+// 			dispatch(toggleIsFetchingAC(isFetching))
+// 		}
+// 	}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+	follow,
+	unfollow,
+	setUsers,
+	setCurrentPage,
+	setTotalUsersCount,
+	toggleIsFetching
+})(UsersContainer)

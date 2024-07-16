@@ -8,16 +8,16 @@ const MyPosts = props => {
 	))
 
 	return (
-		<div>
-			<div>
+		<>
+			<div className={classes.addPost}>
 				<textarea
 					onChange={newPostText => props.updatePostText(newPostText)}
 					value={props.newPostText}
 				></textarea>
 				<button onClick={() => props.addPost()}>Add Post</button>
-				<div className={classes.MyPosts}>{getPosts}</div>
 			</div>
-		</div>
+			<div className={classes.MyPosts}>{getPosts}</div>
+		</>
 	)
 }
 
