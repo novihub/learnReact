@@ -1,6 +1,21 @@
-.Dialogs {
-	background-color: violet;
+.DialogsPage {
 	display: grid;
 	grid-template-columns: 1fr 5fr;
-	padding: 10px;
+	height: 100%;
+}
+
+.Dialogs {
+	background-color: aqua;
+}
+
+.Messages {
+	background-color: palegoldenrod;
+}
+
+.addMessage {
+	display: flex;
+}
+
+.addMessage textarea {
+	width: 100%;
 }

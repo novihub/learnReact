@@ -1,14 +1,9 @@
-import React from 'react'
+import React from 'react';
+import classes from './Music.module.css'
 
 const Music = props => {
-	const musicPage = props.musicPage
-
 	return (
-		<div>
-			{musicPage.musics.map(m => (
-				<div key={m.id}>{m.name}</div>
-			))}
-		</div>
+		<div>Music</div>
 	)
 }
 

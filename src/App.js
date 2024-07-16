@@ -1,12 +1,11 @@
-import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
+import DialogsContainer from './components/Dialogs/DialogsContainer'
 import Header from './components/Header/Header'
+import Music from './components/Music/Music'
 import Nav from './components/Nav/Nav'
 import Profile from './components/Profile/Profile'
-
-import { Route, Routes } from 'react-router-dom'
-import DialogsContainer from './components/Dialogs/DialogsContainer'
-import MusicContainer from './components/Music/MusicContainer'
+import Settings from './components/Settings/Settings'
 import UsersContainer from './components/Users/UsersContainer'
 
 const App = props => {
@@ -16,13 +15,11 @@ const App = props => {
 			<Nav />
 			<div className={classes.AppContent}>
 				<Routes>
-					<Route path='/profile' element={<Profile store={props.store} />} />
-					<Route
-						path='/messages/*'
-						element={<DialogsContainer store={props.store} />}
-					/>
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/messages/*' element={<DialogsContainer />} />
 					<Route path='/users' element={<UsersContainer />} />
-					<Route path='/music' element={<MusicContainer />} />
+					<Route path='/Music' element={<Music />} />
+					<Route path='/Settings' element={<Settings />} />
 				</Routes>
 			</div>
 		</div>

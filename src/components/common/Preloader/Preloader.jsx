@@ -1,13 +1,14 @@
-import React from 'react'
-import preloader from '../../../assets/images/loading.svg'
+import preloader from '../../../assets/loading.svg'
 import classes from './Preloader.module.css'
+
 
 const Preloader = props => {
 	return (
 		<div className={classes.Preloader}>
-			<img src={preloader} />
+			<img src={preloader} alt='Preloader' />
 		</div>
 	)
 }
+
 
 export default Preloader

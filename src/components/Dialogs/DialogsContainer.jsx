@@ -1,52 +1,21 @@
-import {
-	addMessageActionCreator,
-	updateNewMessageActionCreator
-} from '../../redux/dialogs-reducer'
+import { connect } from 'react-redux'
+import { addMessageAC, updateNewMessageAC } from '../../redux/dialogs-reducer'
 import Dialogs from './Dialogs'
 
-import { connect } from 'react-redux'
-
-// const DialogsContainer = props => {
-// 	return (
-// 		<StoreContext.Consumer>
-// 			{store => {
-// 				const addMessage = () => {
-// 					store.dispatch(addMessageActionCreator())
-// 				}
-
-// 				const updateNewMessageText = e => {
-// 					let newMessageText = e.target.value
-// 					store.dispatch(updateNewMessageActionCreator(newMessageText))
-// 				}
-
-// 				return (
-// 					<Dialogs
-// 						addMessage={addMessage}
-// 						updateNewMessage={updateNewMessageText}
-// 						dialogsPage={store.getState().dialogsPage}
-// 					/>
-// 				)
-// 			}}
-// 		</StoreContext.Consumer>
-// 	)
-// }
-
-let mapStateToProps = state => {
-	// data from state
+const mapStateToProps = state => {
 	return {
 		dialogsPage: state.dialogsPage
 	}
 }
 
-let mapDispatchToProps = dispatch => {
-	// callbacks
+const mapDispatchToProps = dispatch => {
 	return {
 		addMessage: () => {
-			dispatch(addMessageActionCreator())
+			dispatch(addMessageAC())
 		},
-		updateNewMessage: e => {
+		updateNewMessageText: e => {
 			let newMessageText = e.target.value
-			dispatch(updateNewMessageActionCreator(newMessageText))
+			dispatch(updateNewMessageAC(newMessageText))
 		}
 	}
 }
