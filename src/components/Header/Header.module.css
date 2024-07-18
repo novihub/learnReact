@@ -2,3 +2,11 @@
 	grid-area: h;
 	background-color: greenyellow;
 }
+
+.loginBlock {
+	float: right;
+}
+
+.loginBlock a {
+	color: white;
+}

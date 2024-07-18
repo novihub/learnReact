@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
-import Header from './components/Header/Header'
+import HeaderContainer from './components/Header/HeaderContainer'
 import Music from './components/Music/Music'
 import Nav from './components/Nav/Nav'
 import ProfileContainer from './components/Profile/ProfileContainer'
@@ -11,7 +11,7 @@ import UsersContainer from './components/Users/UsersContainer'
 const App = props => {
 	return (
 		<div className={classes.App}>
-			<Header />
+			<HeaderContainer />
 			<Nav />
 			<div className={classes.AppContent}>
 				<Routes>
