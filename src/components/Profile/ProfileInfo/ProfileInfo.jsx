@@ -6,8 +6,9 @@ const ProfileInfo = props => {
 	if (!props.profile) {
 		return <Preloader />
 	}
-
+debugger
 	return (
+		
 		<div className={classes.Profile}>
 				<img
 					src={props.profile.photos.large}
