@@ -20,7 +20,7 @@ const Users = props => {
 	} else {
 		slicedPages = pages.slice(curPage - 3, curPage + 2)
 	}
-
+	debugger
 	return (
 		<div>
 			<div className={classes.Users}>
@@ -36,17 +36,22 @@ const Users = props => {
 							<div>
 								{u.followed ? (
 									<button
+										disabled={props.followingInProgress.some(id => id === u.id)}
 										onClick={() => {
+											props.toggleFollowingProgress(true, u.id)
 											axios
 												.delete(
 													`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
 													{
 														withCredentials: true,
-														headers: {'API-KEY': '38578ceb-3e04-4b94-8d1d-f8a020ed5ed8'}
+														headers: {
+															'API-KEY': '38578ceb-3e04-4b94-8d1d-f8a020ed5ed8'
+														}
 													}
 												)
 												.then(res => {
 													if (res.data.resultCode === 0) props.unfollow(u.id)
+													props.toggleFollowingProgress(false, u.id)
 												})
 										}}
 									>
@@ -54,18 +59,23 @@ const Users = props => {
 									</button>
 								) : (
 									<button
+										disabled={props.followingInProgress.some(id => id === u.id)}
 										onClick={() => {
+											props.toggleFollowingProgress(true, u.id)
 											axios
 												.post(
 													`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
 													{},
 													{
 														withCredentials: true,
-														headers: {'API-KEY': '38578ceb-3e04-4b94-8d1d-f8a020ed5ed8'}
+														headers: {
+															'API-KEY': '38578ceb-3e04-4b94-8d1d-f8a020ed5ed8'
+														}
 													}
 												)
 												.then(res => {
 													if (res.data.resultCode === 0) props.follow(u.id)
+													props.toggleFollowingProgress(false, u.id)
 												})
 										}}
 									>
