@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import {
 	follow,
 	getUsers,
@@ -93,12 +94,13 @@ let mapStateToProps = state => {
 // 	}
 // }
 
-const authRedirectComponent = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps, {
-	follow,
-	unfollow,
-	setCurrentPage,
-	toggleFollowingProgress,
-	getUsers
-})(authRedirectComponent)
+export default compose(
+	connect(mapStateToProps, {
+		follow,
+		unfollow,
+		setCurrentPage,
+		toggleFollowingProgress,
+		getUsers
+	}),
+	withAuthRedirect
+)(UsersContainer)

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { compose } from 'redux'
 import { setUserProfile } from '../../redux/profile-reducer'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 import Profile from './Profile'
@@ -30,6 +31,7 @@ let mapStateToProps = state => ({
 	profile: state.profilePage.profile
 })
 
-export default withAuthRedirect(
-	connect(mapStateToProps, { setUserProfile })(ProfileContainer)
-)
+export default compose(
+	connect(mapStateToProps, { setUserProfile }),
+	withAuthRedirect
+)(ProfileContainer)
