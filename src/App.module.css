@@ -11,4 +11,5 @@
 
 .AppContent {
   grid-area: m;
+  height: inherit;
 }

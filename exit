@@ -1,0 +1,289 @@
+[33mcommit f039e42ed47a42e6490669b953649b033fc97016[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 20 10:33:24 2024 -0700
+
+    added redux-thunk, global refactoring, fixing issues
+
+[33mcommit 9defd8e7468e957f03c0bef183d65d2b1c046f7c[m
+Author: novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 20 03:38:14 2024 -0700
+
+    added getUsersThunkCreator
+
+[33mcommit 3d2eeae71bce663d4be4affeccad65737a6155f2[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 19 21:35:02 2024 +0500
+
+    disabled button, filter, some functions
+
+[33mcommit fd11c4284e9e1953f3f4db98211a3b1c2f1771e7[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 19 01:24:15 2024 +0500
+
+    DAL, api.js, axios.create
+
+[33mcommit 48b803307f2c543d004f6b31870ea9c5b0d69e6a[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 19 00:38:05 2024 +0500
+
+    added following feature
+
+[33mcommit 687b81dd04be14b2156bb6f3d20d09b472d10a20[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 18 23:33:36 2024 +0500
+
+    added auth
+
+[33mcommit 6ef2cefd7a1b9ca2a6287abefcbe3285a01d6c36[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Wed Jul 17 15:30:05 2024 +0500
+
+    Refactor ProfileContainer to functional component using useEffect and useParams hooks
+
+[33mcommit 6f763400337347fb4d32e8e0166e0aa3a7177608[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Wed Jul 17 00:59:46 2024 +0500
+
+    changed profile page, modified mapDispatchToProps
+
+[33mcommit e44e732ddd83ebf2e18f385c04b99467fcada3c3[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Tue Jul 16 22:40:55 2024 +0500
+
+    rewrited from scratch
+
+[33mcommit 7e0fb7768373a077fd79cff68bb0c517c960268b[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sun Jul 14 17:07:03 2024 +0500
+
+    added users preloader
+
+[33mcommit b1c11e22e9e5e17577435e34a576be93cd88abac[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sun Jul 14 16:10:30 2024 +0500
+
+    updated UsersContainer, refactoring
+
+[33mcommit 2ce673add275c92cdf09bb86cf5041d3e09afa93[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 13 23:58:48 2024 +0500
+
+    added sliced pages, refactoring
+
+[33mcommit b7fb7a3199c18c5f6f44384915dee2da2083bd19[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 13 23:53:06 2024 +0500
+
+    added users pagination, paginated user output
+
+[33mcommit bc1d53a3991d1fe15683f99e7cbdc90579d4f11a[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 23:01:33 2024 +0500
+
+    refactoring, fixing issues
+
+[33mcommit 8ac76e9a26bddfb2cc489e696e4470426ac61281[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 22:33:51 2024 +0500
+
+    trying classComponents react
+
+[33mcommit 8c8de7b8e70d133a041ed2a8838d2c13e354abb2[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 21:53:14 2024 +0500
+
+    added sideEffect
+
+[33mcommit 9b7aa7362024ffd89f5a298cf72a4b64b4c385c7[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 21:34:40 2024 +0500
+
+    added get request
+
+[33mcommit 7ca9e70adcde591336908365a84a8ccb354e4a21[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 20:48:43 2024 +0500
+
+    added musicPage, refactoring
+
+[33mcommit f8991a6f0102dd1b5cb6a202dfc30192550e88a5[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 12 18:26:04 2024 +0500
+
+    added usersPage
+
+[33mcommit 8b063349d1eefafa0338b0804b89776f6c807dc2[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 11 22:39:31 2024 +0500
+
+    added deep copy, refactoring
+
+[33mcommit d6252c954192a217fafc67d12f679d853d040cb3[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 11 21:36:00 2024 +0500
+
+    added stateCopy, fixed issues
+
+[33mcommit 0c23f6282834a92473c675e910dc7c160a272eef[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 11 15:03:44 2024 +0500
+
+    added connect, mapStateToProps, mapDispatchToProps
+
+[33mcommit 18b009a60d30ebea3e8895a0c15f2241f56ede5a[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Wed Jul 10 16:58:49 2024 +0500
+
+    added StroreContext, Provider, Consumer
+
+[33mcommit 3cda3f09c49bc177a8426b554c4c70efe08d8697[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Wed Jul 10 00:22:37 2024 +0500
+
+    added DialogsContainer
+
+[33mcommit 11c767d62c05226c75fd1e275f4d2b46b05f979a[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Tue Jul 9 23:56:15 2024 +0500
+
+    added MyPostContainer
+
+[33mcommit 4c6d83843f44f4a20f4704707fa975133403f9e4[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Tue Jul 9 00:46:24 2024 +0500
+
+    added redux
+
+[33mcommit 113d283baa9332cd382e884ff8f915be19e1d161[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Mon Jul 8 23:18:02 2024 +0500
+
+    refactoring
+
+[33mcommit 3fac23d0f9e38292c9a104b08b28ed80531e1f27[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Mon Jul 8 22:51:57 2024 +0500
+
+    added reducer
+
+[33mcommit 2fb542fb3986d9dd64cc3807e3845e80e3c58fd6[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Mon Jul 8 21:08:15 2024 +0500
+
+    added action creator func
+
+[33mcommit 33fb4de052cc1291c56e9bda13c626e08070c6b8[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Mon Jul 8 17:53:58 2024 +0500
+
+    added dispatch
+
+[33mcommit 58e09c9ff364a551f2e33bc826a83ff71a466242[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Mon Jul 8 16:26:27 2024 +0500
+
+    global refactoring
+
+[33mcommit 66f8c24b73a3a5e93aaeacf001f7ad67f31e51db[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sun Jul 7 14:32:54 2024 +0500
+
+    added oop, store, _state, refactoring
+
+[33mcommit 909a539f661c47c7b93c08b96b2392c7728e3035[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 19:03:37 2024 +0500
+
+    added observer, subscriber; changed flex cycle
+
+[33mcommit d58faab283bbebd7d9dc7d585811e8235e68bd7b[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 18:34:13 2024 +0500
+
+    flex cycle updated, added dialogs functionality
+
+[33mcommit 4353a3dd4b0d393d006a1064631ea027577fc759[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 17:38:03 2024 +0500
+
+    flux cycle for any change
+
+[33mcommit 9475e8695942d2f26d3202df308bfbe08faf811d[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 15:36:39 2024 +0500
+
+    flex-concept
+
+[33mcommit 30171fdabf5a8f249dd0b6345bb8eb8daa2aa2d8[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 13:36:45 2024 +0500
+
+    added onCLick, ref
+
+[33mcommit 57c6b3ad451fdc6cfabb99c2b53cfc779b10ee3c[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jul 6 00:36:42 2024 +0500
+
+    pack the data into state
+
+[33mcommit c956cbfd025dd5f011e5306cd3f46af1e4b4f17b[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Fri Jul 5 23:43:26 2024 +0500
+
+    data has been updated
+
+[33mcommit 7633743b1fe6a7decbc21b4c66ec509da2bc7812[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 4 22:42:47 2024 +0500
+
+    added method map, refactoring
+
+[33mcommit b9c4f6aaab09319a3bec214cb25e3c6cbbfbbd90[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 4 21:58:59 2024 +0500
+
+    added business logic layer
+
+[33mcommit c2cf1f1a9b6096bcc8c3ad1128131173801b8bfa[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 4 18:15:12 2024 +0500
+
+    props for dialogs
+
+[33mcommit 1057916db22cac59a74bd2ee9faabc472fe2c5f3[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 4 17:47:07 2024 +0500
+
+    route exact
+
+[33mcommit cb4be5e7c2d0b3593112f5a5125f65cceead29aa[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Thu Jul 4 14:03:13 2024 +0500
+
+    added browser-router
+
+[33mcommit 94f5493b30ddec67146a45766f647a7e957eab9d[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sun Jun 30 00:00:58 2024 +0500
+
+    props v1.17.1
+
+[33mcommit 1d808c39fc61ea193ceac4a06f0427c0d24044b5[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jun 29 23:35:15 2024 +0500
+
+    props v1.16
+
+[33mcommit 8b6b825fd765ccc4978a292ba820295bbaf5bc17[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jun 29 23:06:48 2024 +0500
+
+    update structure v1.15
+
+[33mcommit da70d5d2c3d8cdc745dabf322e091a9709e7cbe6[m
+Author: Novikoff <novikoff04@gmail.com>
+Date:   Sat Jun 29 01:05:02 2024 +0500
+
+    13
+
+[33mcommit 3171d1265
