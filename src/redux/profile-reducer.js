@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/api'
+
 const ADD_POST = 'ADD_POST'
 const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -26,7 +28,7 @@ let profileReducer = (state = profilePage, action) => {
 		case UPDATE_POST_TEXT:
 			return { ...state, newPostText: action.newPostText }
 		case SET_USER_PROFILE:
-			return {...state, profile: action.profile}
+			return { ...state, profile: action.profile }
 		default:
 			return state
 	}
@@ -39,6 +41,12 @@ export const updatePostTextAC = newPostText => ({
 	newPostText: newPostText
 })
 
-export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
+export const setUserProfileAC = profile => ({ type: SET_USER_PROFILE, profile })
+
+export const setUserProfile = userId => dispatch => {
+	usersAPI.getProfile(userId).then(res => {
+		dispatch(setUserProfileAC(res.data))
+	})
+}
 
 export default profileReducer

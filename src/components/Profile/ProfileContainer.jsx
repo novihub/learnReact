@@ -1,34 +1,32 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import Profile from "./Profile";
-import axios from "axios";
-import {useParams} from "react-router-dom";
-import {setUserProfile} from '../../redux/profile-reducer'
-
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { setUserProfile } from '../../redux/profile-reducer'
+import Profile from './Profile'
 
 function ProfileContainer(props) {
-    let { userId } = useParams();
-    if (!userId) {
-        userId = 2;
-    }
+	let { userId } = useParams()
+	if (!userId) {
+		userId = 2
+	}
 
-    useEffect(() => {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then((response) => {
-                props.setUserProfile(response.data);
-            });
-    }, [userId]);
+	useEffect(() => {
+		props.setUserProfile(userId)
+		// usersAPI.getProfile(userId)
+		//     .then((response) => {
+		//         props.setUserProfile(response.data);
+		//     });
+	}, [userId, props.setUserProfile, props])
 
-    return (
-        <div>
-            <Profile profile={props.profile} />
-        </div>
-    );
+	return (
+		<div>
+			<Profile profile={props.profile} />
+		</div>
+	)
 }
 
-let mapStateToProps = (state)=> ({
-    profile: state.profilePage.profile
+let mapStateToProps = state => ({
+	profile: state.profilePage.profile
 })
 
-export default connect (mapStateToProps, {setUserProfile})(ProfileContainer)
+export default connect(mapStateToProps, { setUserProfile })(ProfileContainer)
