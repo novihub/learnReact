@@ -5,8 +5,7 @@ import Dialogs from './Dialogs'
 
 const mapStateToProps = state => {
 	return {
-		dialogsPage: state.dialogsPage,
-		isAuth: state.auth.isAuth
+		dialogsPage: state.dialogsPage
 	}
 }
 
@@ -22,9 +21,6 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-const authRedirectComponent = withAuthRedirect(Dialogs)
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(authRedirectComponent)
+export default withAuthRedirect(
+	connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+)

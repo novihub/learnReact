@@ -27,12 +27,9 @@ const ProfileContainer = props => {
 }
 
 let mapStateToProps = state => ({
-	profile: state.profilePage.profile,
-	isAuth: state.auth.isAuth
+	profile: state.profilePage.profile
 })
 
-let authRedirectComponent = withAuthRedirect(ProfileContainer)
-
-export default connect(mapStateToProps, { setUserProfile })(
-	authRedirectComponent
+export default withAuthRedirect(
+	connect(mapStateToProps, { setUserProfile })(ProfileContainer)
 )
