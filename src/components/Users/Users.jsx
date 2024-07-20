@@ -20,7 +20,6 @@ const Users = props => {
 	} else {
 		slicedPages = pages.slice(curPage - 3, curPage + 2)
 	}
-	debugger
 	return (
 		<div>
 			<div className={classes.Users}>
@@ -99,7 +98,7 @@ const Users = props => {
 				{slicedPages.map(p => (
 					<span
 						onClick={e => props.onPageChanged(p)}
-						className={props.currentPage === p && classes.selectedPage}
+						className={props.currentPage === p ? classes.selectedPage : ''}
 					>
 						{p}
 					</span>
