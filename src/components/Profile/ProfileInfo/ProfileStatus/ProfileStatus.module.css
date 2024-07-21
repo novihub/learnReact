@@ -1,0 +1,7 @@
+.ProfileStatus p {
+  user-select: none; /* Disable text selection while double clicking */
+}
+
+.ProfileStatus:hover {
+	background-color: rgb(204, 200, 200);
+}
