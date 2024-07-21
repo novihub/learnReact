@@ -1,4 +1,4 @@
-import { usersAPI } from '../api/api'
+import { authAPI, profileAPI, usersAPI } from '../api/api'
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_USER_IMG = 'SET_USER_IMG'
@@ -40,14 +40,13 @@ export const setUserImg = avatar => ({
 })
 
 export const setAuthUserData = () => dispatch => {
-	usersAPI.setAuthUserData().then(res => {
+	authAPI.setAuthUserData().then(res => {
 		if (res.data.resultCode === 0) {
 			let { id, login, email } = res.data.data
 			dispatch(setAuthUserDataAC(id, email, login))
-			usersAPI.getProfile(id)
-			.then(res => {
-					dispatch(setUserImg(res.data.photos.small))
-				})
+			profileAPI.getProfile(id).then(res => {
+				dispatch(setUserImg(res.data.photos.small))
+			})
 		}
 	})
 }

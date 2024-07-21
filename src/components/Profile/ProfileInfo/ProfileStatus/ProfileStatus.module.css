@@ -5,3 +5,8 @@
 .ProfileStatus:hover {
 	background-color: rgb(204, 200, 200);
 }
+
+.ProfileStatus input {
+	margin: 10px;
+	font-size: 16px;
+}

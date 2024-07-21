@@ -7,11 +7,16 @@ const ProfileInfo = props => {
 	if (!props.profile) {
 		return <Preloader />
 	}
+
 	return (
 		<div className={classes.Profile}>
 			<img src={props.profile.photos.large} alt='IMG' />
 			<div className={classes.ProfileInfo}>
-				<ProfileStatus aboutMe={props.profile.aboutMe}/>
+				<ProfileStatus
+					aboutMe={props.profile.aboutMe}
+					status={props.status}
+					updateStatus={props.updateStatus}
+				/>
 				<h5>Contacts: </h5>
 				<p>{'facebook: ' + props.profile.contacts.facebook}</p>
 				<p>{'vk: ' + props.profile.contacts.vk}</p>
