@@ -7,7 +7,6 @@ import {
 	setUserProfile,
 	updateStatus
 } from '../../redux/profile-reducer'
-import { withAuthRedirect } from '../hoc/withAuthRedirect'
 import Profile from './Profile'
 
 const ProfileContainer = ({
@@ -15,7 +14,8 @@ const ProfileContainer = ({
 	getStatus,
 	profile,
 	status,
-	updateStatus
+	updateStatus,
+	authorizedUserId
 }) => {
 	let { userId } = useParams()
 	userId = userId || 31420
@@ -34,10 +34,11 @@ const ProfileContainer = ({
 
 const mapStateToProps = state => ({
 	profile: state.profilePage.profile,
-	status: state.profilePage.status
+	status: state.profilePage.status,
+	authorizedUserId: state.auth.userId,
+	isAuth: state.auth.isAuth
 })
 
 export default compose(
-	connect(mapStateToProps, { setUserProfile, getStatus, updateStatus }),
-	withAuthRedirect
+	connect(mapStateToProps, { setUserProfile, getStatus, updateStatus })
 )(ProfileContainer)

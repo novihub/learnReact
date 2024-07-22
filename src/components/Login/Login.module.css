@@ -4,3 +4,9 @@
 	align-items: center;
 	height: 100%;
 }
+
+.FormSummaryError {
+	border: 1px red solid;
+	padding: 5px;
+	color: red;
+}
