@@ -40,15 +40,8 @@ export const setUserImg = avatar => ({
 })
 
 export const setAuthUserData = () => dispatch => {
-	authAPI.setAuthUserData().then(res => {
+	return authAPI.setAuthUserData().then(res => {
 		if (res.data.resultCode === 0) {
-			let { id, login, email } = res.data.data
-			dispatch(setAuthUserDataAC(id, email, login, true))
-			profileAPI.getProfile(id).then(res => {
-				dispatch(setUserImg(res.data.photos.small))
-			})
-		}
-		if (res.data.resultCode === 10) {
 			let { id, login, email } = res.data.data
 			dispatch(setAuthUserDataAC(id, email, login, true))
 			profileAPI.getProfile(id).then(res => {

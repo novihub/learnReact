@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { compose } from 'redux'
 import {
 	getStatus,
@@ -15,15 +15,22 @@ const ProfileContainer = ({
 	profile,
 	status,
 	updateStatus,
-	authorizedUserId
+	authorizedUserId,
+	isAuth
 }) => {
 	let { userId } = useParams()
-	userId = userId || 31420
+	userId = userId || authorizedUserId
+	
+		useEffect(() => {
+			if (userId) {
+			setUserProfile(userId)
+			getStatus(userId)}
+		}, [userId, setUserProfile, getStatus])
 
-	useEffect(() => {
-		setUserProfile(userId)
-		getStatus(userId)
-	}, [userId, setUserProfile, getStatus])
+
+	if (!isAuth && !userId) {
+		return <Navigate to='/login' />
+	}
 
 	return (
 		<div>

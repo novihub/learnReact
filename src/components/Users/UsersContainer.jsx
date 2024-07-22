@@ -9,7 +9,6 @@ import {
 	unfollow
 } from '../../redux/users-reducer'
 import Preloader from '../common/Preloader/Preloader'
-import { withAuthRedirect } from '../hoc/withAuthRedirect'
 import Users from './Users'
 
 class UsersContainer extends React.Component {
@@ -101,6 +100,5 @@ export default compose(
 		setCurrentPage,
 		toggleFollowingProgress,
 		getUsers
-	}),
-	withAuthRedirect
+	})
 )(UsersContainer)
