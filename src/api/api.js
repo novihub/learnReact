@@ -36,12 +36,21 @@ export const profileAPI = {
 		return instance.get(`profile/status/` + userID)
 	},
 	updateStatus(status) {
-		return instance.put(`profile/status`, {status})
+		return instance.put(`profile/status`, { status })
 	}
 }
 
 export const authAPI = {
 	setAuthUserData() {
 		return instance.get(`auth/me`)
+	},
+	login(email, password, rememberMe = false, captcha = null) {
+		return instance.post(`auth/login`, { email, password, rememberMe, captcha })
+	},
+	logout() {
+		return instance.delete(`auth/login`)
+	},
+	getCaptchaURL() {
+		return instance.get('security/get-captcha-url')
 	}
 }
