@@ -3,17 +3,25 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import {
 	follow,
-	getUsers,
+	getUsersAPI,
 	setCurrentPage,
 	toggleFollowingProgress,
 	unfollow
 } from '../../redux/users-reducer'
+import {
+	getCurrentPage,
+	getFollowingInProgress,
+	getIsFetching,
+	getPageSize,
+	getTotalUsersCount,
+	getUsers
+} from '../../redux/users-selectors'
 import Preloader from '../common/Preloader/Preloader'
 import Users from './Users'
 
 class UsersContainer extends React.Component {
 	componentDidMount() {
-		this.props.getUsers(this.props.currentPage, this.props.pageSize)
+		this.props.getUsersAPI(this.props.currentPage, this.props.pageSize)
 		// this.props.toggleIsFetching(true)
 
 		// usersAPI
@@ -59,16 +67,6 @@ class UsersContainer extends React.Component {
 		)
 	}
 }
-let mapStateToProps = state => {
-	return {
-		users: state.usersPage.users,
-		pageSize: state.usersPage.pageSize,
-		totalUsersCount: state.usersPage.totalUsersCount,
-		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching,
-		followingInProgress: state.usersPage.followingInProgress
-	}
-}
 
 // let mapDispatchToProps = dispatch => {
 // 	return {
@@ -93,12 +91,34 @@ let mapStateToProps = state => {
 // 	}
 // }
 
+// let mapStateToProps = state => {
+// 	return {
+// 		users: state.usersPage.users,
+// 		pageSize: state.usersPage.pageSize,
+// 		totalUsersCount: state.usersPage.totalUsersCount,
+// 		currentPage: state.usersPage.currentPage,
+// 		isFetching: state.usersPage.isFetching,
+// 		followingInProgress: state.usersPage.followingInProgress
+// 	}
+// }
+
+let mapStateToProps = state => {
+	return {
+		users: getUsers(state),
+		pageSize: getPageSize(state),
+		totalUsersCount: getTotalUsersCount(state),
+		currentPage: getCurrentPage(state),
+		isFetching: getIsFetching(state),
+		followingInProgress: getFollowingInProgress(state)
+	}
+}
+
 export default compose(
 	connect(mapStateToProps, {
 		follow,
 		unfollow,
 		setCurrentPage,
 		toggleFollowingProgress,
-		getUsers
+		getUsersAPI
 	})
 )(UsersContainer)
