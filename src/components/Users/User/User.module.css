@@ -1,0 +1,11 @@
+.User {
+	display: flex;
+	align-items: center;
+	margin-left: 100px;
+}
+
+.UserImg {
+	height: 80px;
+	width: 80px;
+	border-radius: 80px;
+}

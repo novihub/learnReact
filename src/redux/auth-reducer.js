@@ -1,8 +1,8 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI, profileAPI } from '../api/api'
 
-const SET_USER_DATA = 'SET_USER_DATA'
-const SET_USER_IMG = 'SET_USER_IMG'
+const SET_USER_DATA = 'network/auth/SET_USER_DATA'
+const SET_USER_IMG = 'network/auth/SET_USER_IMG'
 
 let initialState = {
 	userId: null,
@@ -39,35 +39,33 @@ export const setUserImg = avatar => ({
 	avatar
 })
 
-export const setAuthUserData = () => dispatch => {
-	return authAPI.setAuthUserData().then(res => {
-		if (res.data.resultCode === 0) {
-			let { id, login, email } = res.data.data
-			dispatch(setAuthUserDataAC(id, email, login, true))
-			profileAPI.getProfile(id).then(res => {
-				dispatch(setUserImg(res.data.photos.small))
-			})
-		}
-	})
+export const setAuthUserData = () => async dispatch => {
+	const authRes = await authAPI.setAuthUserData()
+	if (authRes.data.resultCode === 0) {
+		const { id, login, email } = authRes.data.data
+		dispatch(setAuthUserDataAC(id, email, login, true))
+
+		const profileRes = await profileAPI.getProfile(id)
+		dispatch(setUserImg(profileRes.data.photos.small))
+	}
 }
 
-export const login = (email, password, rememberMe) => dispatch => {
-	authAPI.login(email, password, rememberMe).then(res => {
-		if (res.data.resultCode === 0) {
-			dispatch(setAuthUserData())
-		} else {
-			let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Invalid'
-			dispatch(stopSubmit('login', { _error: message }))
-		}
-	})
+export const login = (email, password, rememberMe) => async dispatch => {
+	let res = await authAPI.login(email, password, rememberMe)
+	if (res.data.resultCode === 0) {
+		dispatch(setAuthUserData())
+	} else {
+		let message =
+			res.data.messages.length > 0 ? res.data.messages[0] : 'Invalid'
+		dispatch(stopSubmit('login', { _error: message }))
+	}
 }
 
-export const logout = () => dispatch => {
-	authAPI.logout().then(res => {
-		if (res.data.resultCode === 0) {
-			dispatch(setAuthUserDataAC(null, null, null, false))
-		}
-	})
+export const logout = () => async dispatch => {
+	let res = await authAPI.logout()
+	if (res.data.resultCode === 0) {
+		dispatch(setAuthUserDataAC(null, null, null, false))
+	}
 }
 
 export default authReducer

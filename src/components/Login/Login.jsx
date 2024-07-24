@@ -1,40 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { login } from '../../redux/auth-reducer'
 import { required } from '../../utils/validators/validators'
-import { Input } from '../hoc/createFormsControls'
+import { createField, Input } from '../hoc/FormsControls/createFormsControls'
 import classes from './Login.module.css'
 
-const LoginForm = props => {
+const LoginForm = ({ handleSubmit, error }) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
-			<div>
-				<Field
+		<form onSubmit={handleSubmit}>
+			{/* <Field
 					validate={[required]}
 					placeholder='email'
 					name='email'
 					component={Input}
-				/>
-			</div>
-			,
-			<div>
-				,
-				<Field
-					validate={[required]}
-					placeholder='Password'
-					name='password'
-					type='password'
-					component={Input}
-				/>
-			</div>
-			<div>
-				<Field type='checkbox' name='rememberMe' component={Input} />
-			</div>
-			{props.error && (
-				<div className={classes.FormSummaryError}>{props.error}</div>
-			)}
+				/> */}
+			{createField('Email', 'email', [required], Input)}
+			{createField('Password', 'password', [required], Input, {
+				type: 'password'
+			})}
+			{createField(null, 'rememberMe', [], Input, { type: 'checkbox' }, 'remember me')}
+
+			{/* <Field
+				validate={[required]}
+				placeholder='Password'
+				name='password'
+				type='password'
+				component={Input}
+			/> */}
+
+			{/* <Field type='checkbox' name='rememberMe' component={Input} /> */}
+			{error && <div className={classes.FormSummaryError}>{error}</div>}
 			<div>
 				<button>Login</button>
 			</div>
@@ -46,12 +43,12 @@ const LoginReduxForm = reduxForm({
 	form: 'login'
 })(LoginForm)
 
-const Login = props => {
+const Login = ({ login, isAuth }) => {
 	const onSubmit = ({ email, password, rememberMe }) => {
-		props.login(email, password, rememberMe)
+		login(email, password, rememberMe)
 	}
 
-	if (props.isAuth) {
+	if (isAuth) {
 		return <Navigate to='/profile' />
 	}
 

@@ -1,0 +1,21 @@
+.selectedPage {
+	font-weight: bold;
+	transform: scale(1.2);
+}
+
+.PageNumbers {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.PageNumber {
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.PageNumber:hover {
+	transform: scale(1.2);
+}

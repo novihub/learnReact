@@ -2,26 +2,3 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 }
-
-.User {
-	display: flex;
-	align-items: center;
-	margin-left: 100px;
-}
-
-.Users img {
-	height: 80px;
-	width: 80px;
-	border-radius: 80px;
-}
-
-.selectedPage {
-	font-weight: bold;
-}
-
-.PageNumbers {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 5px;
-}

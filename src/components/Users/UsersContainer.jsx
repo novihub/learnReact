@@ -21,7 +21,8 @@ import Users from './Users'
 
 class UsersContainer extends React.Component {
 	componentDidMount() {
-		this.props.getUsersAPI(this.props.currentPage, this.props.pageSize)
+		const { currentPage, pageSize } = this.props
+		this.props.getUsersAPI(currentPage, pageSize)
 		// this.props.toggleIsFetching(true)
 
 		// usersAPI
@@ -34,7 +35,8 @@ class UsersContainer extends React.Component {
 	}
 
 	onPageChanged = pageNumber => {
-		this.props.getUsersAPI(pageNumber, this.props.pageSize)
+		const { pageSize } = this.props
+		this.props.getUsersAPI(pageNumber, pageSize)
 
 		// this.props.toggleIsFetching(true)
 		// this.props.setCurrentPage(pageNumber)
@@ -46,7 +48,6 @@ class UsersContainer extends React.Component {
 	}
 
 	render() {
-		console.log('render')
 		return (
 			<>
 				{this.props.isFetching ? (
@@ -104,7 +105,6 @@ class UsersContainer extends React.Component {
 // }
 
 let mapStateToProps = state => {
-	console.log('mapStateToProps')
 	return {
 		users: getUsers(state),
 		pageSize: getPageSize(state),

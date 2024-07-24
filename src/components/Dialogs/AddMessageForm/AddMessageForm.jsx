@@ -1,6 +1,6 @@
 import { Field, reduxForm } from 'redux-form'
 import { maxLength100, required } from '../../../utils/validators/validators'
-import { Textarea } from '../../hoc/createFormsControls'
+import { Textarea } from '../../hoc/FormsControls/createFormsControls'
 
 const AddMessageForm = props => {
 	return (
