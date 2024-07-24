@@ -6,10 +6,18 @@ import classes from './MyPosts.module.css'
 import Post from './Posts/Post'
 
 const MyPosts = props => {
-	console.log(props)
-	console.log('render')
+	const deletePost = postId => {
+		props.deletePost(postId)
+	}
+	
 	let getPosts = props.posts.map(p => (
-		<Post key={p.id} message={p.message} likesCount={p.likesCount} />
+		<Post
+			deletePost={deletePost}
+			key={p.id}
+			id={p.id}
+			message={p.message}
+			likesCount={p.likesCount}
+		/>
 	))
 
 	const onAddPost = values => {
@@ -17,6 +25,7 @@ const MyPosts = props => {
 			props.addPost(values.newPostText)
 		}
 	}
+
 	return (
 		<>
 			<div className={classes.addPost}>
