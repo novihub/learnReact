@@ -20,13 +20,13 @@ const ProfileContainer = ({
 }) => {
 	let { userId } = useParams()
 	userId = userId || authorizedUserId
-	
-		useEffect(() => {
-			if (userId) {
-			setUserProfile(userId)
-			getStatus(userId)}
-		}, [userId, setUserProfile, getStatus])
 
+	useEffect(() => {
+		if (userId) {
+			setUserProfile(userId)
+			getStatus(userId)
+		}
+	}, [userId, setUserProfile, getStatus])
 
 	if (!isAuth && !userId) {
 		return <Navigate to='/login' />

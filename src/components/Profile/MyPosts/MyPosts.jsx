@@ -6,6 +6,8 @@ import classes from './MyPosts.module.css'
 import Post from './Posts/Post'
 
 const MyPosts = props => {
+	console.log(props)
+	console.log('render')
 	let getPosts = props.posts.map(p => (
 		<Post key={p.id} message={p.message} likesCount={p.likesCount} />
 	))
@@ -15,7 +17,6 @@ const MyPosts = props => {
 			props.addPost(values.newPostText)
 		}
 	}
-
 	return (
 		<>
 			<div className={classes.addPost}>
@@ -44,4 +45,4 @@ const AddNewPostFormRedux = reduxForm({ form: 'ProfileAddNewPostForm' })(
 	AddNewPostForm
 )
 
-export default MyPosts
+export default React.memo(MyPosts)
