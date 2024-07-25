@@ -40,7 +40,7 @@ class App extends React.Component {
 				<div className={classes.AppContent}>
 					<Suspense fallback={<Preloader />}>
 						<Routes>
-							<Route path='/profile/:userId?' element={<ProfileContainer />} />
+							<Route path='/profile/:userId' element={<ProfileContainer />} />
 							<Route path='/messages/*' element={<DialogsContainer />} />
 							<Route path='/users' element={<UsersContainer />} />
 							<Route path='/music' element={<MusicContainer />} />

@@ -17,10 +17,10 @@ const Header = props => {
 				{props.avatar ? (
 					<img src={props.avatar} alt='' />
 				) : (
-					<img className={userStyle.userPNG} src={userPNG} alt='' />
+					<img src={userPNG} alt='' />
 				)}
 				{props.isAuth ? (
-					<div>
+					<div className={classes.logout}>
 						{props.login}
 						<button onClick={logout}>Logout</button>
 					</div>

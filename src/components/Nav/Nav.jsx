@@ -1,13 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import classes from './Nav.module.css'
 
-const Nav = props => {
+const Nav = ({ userId }) => {
 	return (
 		<div className={classes.Nav}>
 			<ul>
 				<li className={classes.NavItem}>
-					<NavLink to='/profile'>Profile</NavLink>
+					<NavLink to={`/profile/${userId}`}>Profile</NavLink>
 				</li>
 				<li className={classes.NavItem}>
 					<NavLink to='/messages'>Messages</NavLink>
@@ -26,4 +27,8 @@ const Nav = props => {
 	)
 }
 
-export default Nav
+const mapStateToProps = state => ({
+	userId: state.auth.userId
+})
+
+export default connect(mapStateToProps, {})(Nav)

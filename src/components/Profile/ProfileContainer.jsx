@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 import { compose } from 'redux'
 import {
 	getStatus,
+	savePhoto,
 	setUserProfile,
 	updateStatus
 } from '../../redux/profile-reducer'
 import Profile from './Profile'
+import Preloader from '../common/Preloader/Preloader'
 
 const ProfileContainer = ({
 	setUserProfile,
@@ -16,26 +18,59 @@ const ProfileContainer = ({
 	status,
 	updateStatus,
 	authorizedUserId,
-	isAuth
+	isAuth,
+	savePhoto
 }) => {
 	let { userId } = useParams()
 	userId = userId || authorizedUserId
 
+	const [isOwner, setIsOwner] = useState(false)
+	const [isLoading, setIsLoading] = useState(true)
+
 	useEffect(() => {
-		if (userId) {
-			setUserProfile(userId)
-			getStatus(userId)
+		const fetchData = async () => {
+			try {
+				setIsLoading(true)
+				await setUserProfile(userId)
+				await getStatus(userId)
+				setIsOwner(String(userId) === String(authorizedUserId))
+			} finally {
+				setIsLoading(false)
+			}
 		}
-	}, [userId, setUserProfile, getStatus])
+
+		if (userId) {
+			fetchData()
+		}
+	}, [userId, setUserProfile, getStatus, authorizedUserId])
 
 	if (!isAuth && !userId) {
 		return <Navigate to='/login' />
 	}
+	// console.log('User ID:', userId);
+	// console.log('Authorized User ID:', authorizedUserId);
+	// console.log('Is Owner:', isOwner);
+
+	// console.log('Profile:', profile);
+	// console.log('Status:', status);
+	// console.log('Authorized User ID:', authorizedUserId);
+	// console.log('Is Auth:', isAuth);
+	// console.log(typeof userId, typeof authorizedUserId);
 
 	return (
-		<div>
-			<Profile profile={profile} status={status} updateStatus={updateStatus} />
-		</div>
+		<>
+			{isLoading ? (
+				<Preloader />
+			) : (
+				<Profile
+					isOwner={isOwner}
+					profile={profile}
+					status={status}
+					updateStatus={updateStatus}
+					savePhoto={savePhoto}
+				/>
+			)}
+		</>
 	)
 }
 
@@ -47,5 +82,10 @@ const mapStateToProps = state => ({
 })
 
 export default compose(
-	connect(mapStateToProps, { setUserProfile, getStatus, updateStatus })
+	connect(mapStateToProps, {
+		setUserProfile,
+		getStatus,
+		updateStatus,
+		savePhoto
+	})
 )(ProfileContainer)

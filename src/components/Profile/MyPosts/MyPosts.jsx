@@ -29,7 +29,7 @@ const MyPosts = props => {
 	return (
 		<>
 			<div className={classes.addPost}>
-				<AddNewPostFormRedux onSubmit={onAddPost} />
+				{props.isOwner && <AddNewPostFormRedux onSubmit={onAddPost} />}
 			</div>
 			<div className={classes.MyPosts}>{getPosts}</div>
 		</>

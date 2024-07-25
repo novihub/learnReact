@@ -1,12 +1,27 @@
 .Header {
 	grid-area: h;
 	background-color: greenyellow;
+	display: flex;
+	justify-content: end;
+	align-items: center;
 }
 
 .loginBlock {
-	float: right;
+	display: flex;
+	gap: 10px;
 }
 
 .loginBlock a {
 	color: white;
+	margin-right: 10px;
+}
+
+.loginBlock img {
+	width: 40px;
+}
+
+.logout {
+	display: flex;
+	flex-direction: column;
+	margin-right: 10px;
 }
