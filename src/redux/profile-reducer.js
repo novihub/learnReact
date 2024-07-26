@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../api/api'
 
 const ADD_POST = 'ADD_POST'
@@ -5,6 +6,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const DELETE_POST = 'DELETE_POST'
 const SAVE_PHOTO = 'SAVE_PHOTO'
+const SAVE_PROFILE = 'SAVE_PROFILE'
 
 let profilePage = {
 	posts: [
@@ -41,6 +43,11 @@ let profileReducer = (state = profilePage, action) => {
 				...state,
 				profile: { ...state.profile, photos: action.photos }
 			}
+		case SAVE_PROFILE:
+			return {
+				...state,
+				profile: { ...state, profile: action.profile }
+			}
 		default:
 			return state
 	}
@@ -51,6 +58,7 @@ export const setUserProfileAC = profile => ({ type: SET_USER_PROFILE, profile })
 export const setStatusAC = status => ({ type: SET_STATUS, status })
 export const deletePostAC = postId => ({ type: DELETE_POST, postId })
 export const savePhotoAC = file => ({ type: SAVE_PHOTO, file })
+export const saveProfileAC = profile => ({ type: SAVE_PROFILE, profile })
 
 export const setUserProfile = userId => async dispatch => {
 	let res = await profileAPI.getProfile(userId)
@@ -77,5 +85,16 @@ export const savePhoto = file => async dispatch => {
 	}
 }
 
+export const saveProfile = profile => async (dispatch, getState) => {
+	const userId = getState().auth.userId
+	let res = await profileAPI.saveProfile(profile)
+
+	if (res.data.resultCode === 0) {
+		dispatch(setUserProfileAC(userId))
+	} else {
+		dispatch(stopSubmit('edit-profile' ,{_error: res.data.messages[0]}))
+		return Promise.reject(res.data.messages[0])
+	}
+}
 
 export default profileReducer
