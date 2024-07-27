@@ -7,7 +7,7 @@ import { required } from '../../utils/validators/validators'
 import { createField, Input } from '../hoc/FormsControls/createFormsControls'
 import classes from './Login.module.css'
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			{/* <Field
@@ -21,7 +21,8 @@ const LoginForm = ({ handleSubmit, error }) => {
 				type: 'password'
 			})}
 			{createField(null, 'rememberMe', [], Input, { type: 'checkbox' }, 'remember me')}
-
+			{captchaUrl && <img src={captchaUrl} alt=''/>} 
+			{captchaUrl && createField('Symbols from image', 'captcha', [required], Input, {})}
 			{/* <Field
 				validate={[required]}
 				placeholder='Password'
@@ -43,9 +44,9 @@ const LoginReduxForm = reduxForm({
 	form: 'login'
 })(LoginForm)
 
-const Login = ({ login, isAuth }) => {
-	const onSubmit = ({ email, password, rememberMe }) => {
-		login(email, password, rememberMe)
+const Login = ({ login, isAuth, captchaUrl }) => {
+	const onSubmit = ({ email, password, rememberMe, captcha }) => {
+		login(email, password, rememberMe, captcha)
 	}
 
 	if (isAuth) {
@@ -55,14 +56,15 @@ const Login = ({ login, isAuth }) => {
 	return (
 		<div className={classes.Login}>
 			<h1>Access denied! You need to login :(</h1>
-			<LoginReduxForm onSubmit={onSubmit} />
+			<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
 		</div>
 	)
 }
 export default connect(
 	state => {
 		return {
-			isAuth: state.auth.isAuth
+			isAuth: state.auth.isAuth,
+			captchaUrl: state.auth.captchaUrl
 		}
 	},
 	{
