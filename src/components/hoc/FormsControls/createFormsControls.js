@@ -3,7 +3,7 @@ import classes from './createFormsControls.module.css'
 
 const Element =
 	Element =>
-	({ input, meta: {touched, error}, ...props }) => {
+	({ input, meta: { touched, error }, ...props }) => {
 		const hasError = touched && error
 
 		return (

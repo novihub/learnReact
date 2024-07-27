@@ -1,5 +1,4 @@
-import React from 'react';
-import classes from './Settings.module.css'
+import React from 'react'
 
 const Settings = props => {
 	return (

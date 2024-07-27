@@ -1,11 +1,9 @@
 import React from 'react'
 import { Navigate, NavLink } from 'react-router-dom'
 import userPNG from '../../assets/user.png'
-import userStyle from '../common/User/userPNG.module.css'
 import classes from './Header.module.css'
 
 const Header = props => {
-
 	const logout = () => {
 		props.logout()
 		return <Navigate to='/login' />

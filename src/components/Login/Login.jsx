@@ -20,9 +20,17 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
 			{createField('Password', 'password', [required], Input, {
 				type: 'password'
 			})}
-			{createField(null, 'rememberMe', [], Input, { type: 'checkbox' }, 'remember me')}
-			{captchaUrl && <img src={captchaUrl} alt=''/>} 
-			{captchaUrl && createField('Symbols from image', 'captcha', [required], Input, {})}
+			{createField(
+				null,
+				'rememberMe',
+				[],
+				Input,
+				{ type: 'checkbox' },
+				'remember me'
+			)}
+			{captchaUrl && <img src={captchaUrl} alt='' />}
+			{captchaUrl &&
+				createField('Symbols from image', 'captcha', [required], Input, {})}
 			{/* <Field
 				validate={[required]}
 				placeholder='Password'
@@ -56,7 +64,7 @@ const Login = ({ login, isAuth, captchaUrl }) => {
 	return (
 		<div className={classes.Login}>
 			<h1>Access denied! You need to login :(</h1>
-			<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
+			<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
 		</div>
 	)
 }

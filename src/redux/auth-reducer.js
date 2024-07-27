@@ -62,19 +62,20 @@ export const setAuthUserData = () => async dispatch => {
 	}
 }
 
-export const login = (email, password, rememberMe, captcha) => async dispatch => {
-	let res = await authAPI.login(email, password, rememberMe, captcha)
-	if (res.data.resultCode === 0) {
-		dispatch(setAuthUserData())
-	} else {
-		if (res.data.resultCode === 1) {
-			dispatch(getCaptchaURL())
+export const login =
+	(email, password, rememberMe, captcha) => async dispatch => {
+		let res = await authAPI.login(email, password, rememberMe, captcha)
+		if (res.data.resultCode === 0) {
+			dispatch(setAuthUserData())
+		} else {
+			if (res.data.resultCode === 1) {
+				dispatch(getCaptchaURL())
+			}
+			let message =
+				res.data.messages.length > 0 ? res.data.messages[0] : 'Invalid'
+			dispatch(stopSubmit('login', { _error: message }))
 		}
-		let message =
-			res.data.messages.length > 0 ? res.data.messages[0] : 'Invalid'
-		dispatch(stopSubmit('login', { _error: message }))
 	}
-}
 
 export const logout = () => async dispatch => {
 	let res = await authAPI.logout()

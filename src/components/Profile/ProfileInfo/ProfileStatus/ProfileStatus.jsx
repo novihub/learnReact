@@ -57,7 +57,9 @@ class ProfileStatus extends React.Component {
 					</div>
 				) : (
 					<div>
-						<p onDoubleClick={this.activateEditMode}>{this.props.status || 'No status'}</p>
+						<p onDoubleClick={this.activateEditMode}>
+							{this.props.status || 'No status'}
+						</p>
 						{/* <p onDoubleClick={this.activateEditMode}>{this.props.aboutMe}</p> */}
 					</div>
 				)}

@@ -10,7 +10,9 @@ const Post = props => {
 				alt='IMG'
 			/>
 			<p>Like {props.likesCount}</p>
-			<button onClick={() => props.deletePost(props.id)}>Delete this post</button>
+			<button onClick={() => props.deletePost(props.id)}>
+				Delete this post
+			</button>
 		</div>
 	)
 }

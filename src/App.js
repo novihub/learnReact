@@ -1,6 +1,6 @@
 import React, { lazy, startTransition, Suspense } from 'react'
 import { connect } from 'react-redux'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
 import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
@@ -40,6 +40,7 @@ class App extends React.Component {
 				<div className={classes.AppContent}>
 					<Suspense fallback={<Preloader />}>
 						<Routes>
+							<Route path='/' element={<Navigate to='profile' replace />} />
 							<Route path='/profile/:userId' element={<ProfileContainer />} />
 							<Route path='/messages/*' element={<DialogsContainer />} />
 							<Route path='/users' element={<UsersContainer />} />

@@ -9,7 +9,7 @@ const MyPosts = props => {
 	const deletePost = postId => {
 		props.deletePost(postId)
 	}
-	
+
 	let getPosts = props.posts.map(p => (
 		<Post
 			deletePost={deletePost}

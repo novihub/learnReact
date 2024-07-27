@@ -1,5 +1,5 @@
 .ProfileStatus p {
-  user-select: none; /* Disable text selection while double clicking */
+	user-select: none; /* Disable text selection while double clicking */
 }
 
 .ProfileStatus:hover {
