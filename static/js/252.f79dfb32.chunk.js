@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunklearnReact=self.webpackChunklearnReact||[]).push([[252],{6252:(s,t,e)=>{e.r(t),e.d(t,{default:()=>u});var n=e(76),r=(e(5043),e(579));const a=s=>(0,r.jsx)("div",{children:"Settings"}),u=(0,n.H)(a)},76:(s,t,e)=>{e.d(t,{H:()=>i});var n=e(5043),r=e(2166),a=e(3216),u=e(579);let h=s=>({isAuth:s.auth.isAuth});const i=s=>{class t extends n.Component{render(){return this.props.isAuth?(0,u.jsx)(s,{...this.props}):(0,u.jsx)(a.C5,{to:"/login"})}}return(0,r.Ng)(h)(t)}}}]);
+//# sourceMappingURL=252.f79dfb32.chunk.js.map
