@@ -19,7 +19,8 @@ const authReducer = (state = initialState, action) => {
 		case SET_USER_DATA:
 			return {
 				...state,
-				...action.payload
+				...action.payload,
+				isAuth: action.payload.isAuth
 			}
 		case SET_USER_IMG:
 			return {
@@ -56,7 +57,6 @@ export const setAuthUserData = () => async dispatch => {
 	if (authRes.data.resultCode === 0) {
 		const { id, login, email } = authRes.data.data
 		dispatch(setAuthUserDataAC(id, email, login, true))
-
 		const profileRes = await profileAPI.getProfile(id)
 		dispatch(setUserImg(profileRes.data.photos.small))
 	}

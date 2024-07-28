@@ -17,6 +17,7 @@ let profilePage = {
 		{ id: 5, message: 'Post 5', likesCount: '14' }
 	],
 	profile: null,
+	userId: null,
 	status: ''
 }
 

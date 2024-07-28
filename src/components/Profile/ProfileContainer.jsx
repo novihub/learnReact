@@ -23,11 +23,12 @@ const ProfileContainer = ({
 	savePhoto,
 	saveProfile
 }) => {
-	let { userId } = useParams()
-	userId = userId || authorizedUserId
-
 	const [isOwner, setIsOwner] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
+
+	let {userId} = useParams()
+
+	userId = userId || authorizedUserId
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -40,27 +41,14 @@ const ProfileContainer = ({
 				setIsLoading(false)
 			}
 		}
-
 		if (userId) {
 			fetchData()
 		}
 	}, [userId, setUserProfile, getStatus, authorizedUserId])
 
-	if (!isAuth && !!userId) {
+	if (!isAuth && !userId) {
 		return <Navigate to='/login' />
 	}
-
-	console.log(!isAuth)
-	console.log(userId)
-	// console.log('User ID:', userId);
-	// console.log('Authorized User ID:', authorizedUserId);
-	// console.log('Is Owner:', isOwner);
-
-	// console.log('Profile:', profile);
-	// console.log('Status:', status);
-	// console.log('Authorized User ID:', authorizedUserId);
-	// console.log('Is Auth:', isAuth);
-	// console.log(typeof userId, typeof authorizedUserId);
 
 	return (
 		<>

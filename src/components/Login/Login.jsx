@@ -52,13 +52,13 @@ const LoginReduxForm = reduxForm({
 	form: 'login'
 })(LoginForm)
 
-const Login = ({ login, isAuth, captchaUrl }) => {
+const Login = ({ login, isAuth, captchaUrl, userId }) => {
 	const onSubmit = ({ email, password, rememberMe, captcha }) => {
 		login(email, password, rememberMe, captcha)
 	}
 
 	if (isAuth) {
-		return <Navigate to='/profile' />
+		return <Navigate to={`/profile/${userId}`} />
 	}
 
 	return (
@@ -72,7 +72,8 @@ export default connect(
 	state => {
 		return {
 			isAuth: state.auth.isAuth,
-			captchaUrl: state.auth.captchaUrl
+			captchaUrl: state.auth.captchaUrl,
+			userId: state.auth.userId
 		}
 	},
 	{

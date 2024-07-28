@@ -1,4 +1,4 @@
-import React, { lazy, startTransition, Suspense } from 'react'
+import React, { lazy, startTransition, Suspense, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
@@ -6,7 +6,6 @@ import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Nav from './components/Nav/Nav'
 import { initializeApp } from './redux/app-reducer'
-import { setAuthUserData } from './redux/auth-reducer'
 
 const DialogsContainer = lazy(() =>
 	import('./components/Dialogs/DialogsContainer')
@@ -21,47 +20,42 @@ const SettingsContainer = lazy(() =>
 	import('./components/Settings/SettingsContainer')
 )
 
-class App extends React.Component {
-	componentDidMount() {
+const App = ({ initialized, initializeApp }) => {
+	useEffect(() => {
 		startTransition(() => {
-			this.props.initializeApp()
+			initializeApp()
 		})
+	}, [initializeApp])
+
+	if (!initialized) {
+		return <Preloader />
 	}
 
-	render() {
-		if (!this.props.initialized) {
-			return <Preloader />
-		}
-
-		return (
-			<div className={classes.App}>
-				<HeaderContainer />
-				<Nav />
-				<div className={classes.AppContent}>
-					<Suspense fallback={<Preloader />}>
-						<Routes>
-							<Route path='/' element={<Navigate to='profile' replace />} />
-							<Route path='/profile/:userId' element={<ProfileContainer />} />
-							<Route path='/messages/*' element={<DialogsContainer />} />
-							<Route path='/users' element={<UsersContainer />} />
-							<Route path='/music' element={<MusicContainer />} />
-							<Route path='/settings' element={<SettingsContainer />} />
-							<Route path='/login' element={<Login />} />
-						</Routes>
-					</Suspense>
-				</div>
+	return (
+		<div className={classes.App}>
+			<HeaderContainer />
+			<Nav />
+			<div className={classes.AppContent}>
+				<Suspense fallback={<Preloader />}>
+					<Routes>
+						<Route path='/' element={<Navigate to='login' replace />} />
+						<Route path='/profile/:userId' element={<ProfileContainer />} />
+						<Route path='/messages/*' element={<DialogsContainer />} />
+						<Route path='/users' element={<UsersContainer />} />
+						<Route path='/music' element={<MusicContainer />} />
+						<Route path='/settings' element={<SettingsContainer />} />
+						<Route path='/login' element={<Login />} />
+					</Routes>
+				</Suspense>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
-const mapStateToProps = state => {
-	return {
-		initialized: state.app.initialized
-	}
-}
+const mapStateToProps = state => ({
+	initialized: state.app.initialized
+})
 
 export default connect(mapStateToProps, {
-	setAuthUserData,
 	initializeApp
 })(App)

@@ -8,7 +8,11 @@ const Nav = ({ userId }) => {
 		<div className={classes.Nav}>
 			<ul>
 				<li className={classes.NavItem}>
-					<NavLink to={`/profile/${userId}`}>Profile</NavLink>
+					{userId ? (
+						<NavLink to={`/profile/${userId}`}>Profile</NavLink>
+					) : (
+						<NavLink to='login'>Profile</NavLink>
+					)}
 				</li>
 				<li className={classes.NavItem}>
 					<NavLink to='/messages'>Messages</NavLink>

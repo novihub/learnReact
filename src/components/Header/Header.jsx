@@ -1,16 +1,19 @@
-import React from 'react'
-import { Navigate, NavLink } from 'react-router-dom'
-import userPNG from '../../assets/user.png'
-import classes from './Header.module.css'
+import React, { useState } from 'react';
+import { Navigate, NavLink } from 'react-router-dom';
+import userPNG from '../../assets/user.png';
+import classes from './Header.module.css';
 
-const Header = props => {
+const Header = (props) => {
+	const [redirect, setRedirect] = useState(false);
+
 	const logout = () => {
-		props.logout()
-		return <Navigate to='/login' />
-	}
+		props.logout();
+		setRedirect(true);
+	};
 
 	return (
 		<div className={classes.Header}>
+			{redirect && <Navigate to='/login' />}
 			<div className={classes.loginBlock}>
 				{props.avatar ? (
 					<img src={props.avatar} alt='' />
@@ -27,7 +30,7 @@ const Header = props => {
 				)}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default Header
+export default Header;
