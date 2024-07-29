@@ -5,7 +5,7 @@ import classes from './App.module.css'
 import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Nav from './components/Nav/Nav'
-import { initializeApp } from './redux/app-reducer'
+import { initializeApp } from './redux/app-reducer.ts'
 
 const DialogsContainer = lazy(() =>
 	import('./components/Dialogs/DialogsContainer')

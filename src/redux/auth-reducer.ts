@@ -5,6 +5,15 @@ const SET_USER_DATA = 'network/auth/SET_USER_DATA'
 const SET_USER_IMG = 'network/auth/SET_USER_IMG'
 const GET_CAPTCHA_URL = 'GET_CAPTCHA_URL'
 
+export type initialStateType = {
+	userId: number | null
+	email: string | null
+	login: string | null
+	isAuth: boolean
+	avatar: any
+	captchaUrl: string | null
+}
+
 let initialState = {
 	userId: null,
 	email: null,
@@ -14,7 +23,7 @@ let initialState = {
 	captchaUrl: null
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: any): initialStateType => {
 	switch (action.type) {
 		case SET_USER_DATA:
 			return {
@@ -37,17 +46,42 @@ const authReducer = (state = initialState, action) => {
 	}
 }
 
-export const setAuthUserDataAC = (userId, email, login, isAuth) => ({
+type setAuthUserDataActionType = {
+	type: typeof SET_USER_DATA
+	payload: {
+		userId: number
+		email: string
+		login: string
+		isAuth: boolean
+	}
+}
+
+export const setAuthUserDataAC = (
+	userId,
+	email,
+	login,
+	isAuth
+): setAuthUserDataActionType => ({
 	type: SET_USER_DATA,
 	payload: { userId, email, login, isAuth }
 })
 
-export const getCaptchaUrlAC = captchaUrl => ({
+type getCaptchaUrlActionType = {
+	type: typeof GET_CAPTCHA_URL
+	payload: { captchaUrl: string }
+}
+
+export const getCaptchaUrlAC = (captchaUrl): getCaptchaUrlActionType => ({
 	type: GET_CAPTCHA_URL,
 	payload: { captchaUrl }
 })
 
-export const setUserImg = avatar => ({
+type setUserImgActionType = {
+	type: typeof SET_USER_IMG
+	avatar: any
+}
+
+export const setUserImg = (avatar): setUserImgActionType => ({
 	type: SET_USER_IMG,
 	avatar
 })

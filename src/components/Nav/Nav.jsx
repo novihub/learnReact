@@ -11,7 +11,7 @@ const Nav = ({ userId }) => {
 					{userId ? (
 						<NavLink to={`/profile/${userId}`}>Profile</NavLink>
 					) : (
-						<NavLink to='login'>Profile</NavLink>
+						<NavLink to='/login'>Profile</NavLink>
 					)}
 				</li>
 				<li className={classes.NavItem}>
