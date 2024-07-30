@@ -1,4 +1,4 @@
-import { setAuthUserData } from './auth-reducer.ts'
+import { setAuthUserData } from './auth-reducer'
 
 const INITIALIZED_SUCCESS: string = 'INITIALIZED_SUCCESS'
 
