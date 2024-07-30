@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect'
+import { UserType } from './users-reducer'
 
 export const getUsers = createSelector(
 	state => state.usersPage.users,
 	users => {
-		return users.filter(u => true)
+		return users.filter(u  => true)
 	}
 )
 

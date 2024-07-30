@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ProfileType } from '../types/types'
 
 const instance = axios.create({
 	withCredentials: true,
@@ -9,17 +10,17 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-	getUsers(currentPage, pageSize) {
+	getUsers(currentPage: number, pageSize: number) {
 		return instance
 			.get(`users?page=${currentPage}&count=${pageSize}`)
 			.then(res => res.data)
 	},
-	follow(userID) {
+	follow(userID: number) {
 		return instance.post(
 			`https://social-network.samuraijs.com/api/1.0/follow/${userID}`
 		)
 	},
-	unfollow(userID) {
+	unfollow(userID: number) {
 		return instance.delete(
 			`https://social-network.samuraijs.com/api/1.0/follow/${userID}`
 		)
@@ -27,18 +28,18 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-	getProfile(userID) {
+	getProfile(userID: number) {
 		return instance.get(
 			`https://social-network.samuraijs.com/api/1.0/profile/${userID}`
 		)
 	},
-	getStatus(userID) {
+	getStatus(userID: number) {
 		return instance.get(`profile/status/` + userID)
 	},
-	updateStatus(status) {
+	updateStatus(status: number) {
 		return instance.put(`profile/status`, { status })
 	},
-	savePhoto(file) {
+	savePhoto(file: any) {
 		const formData = new FormData()
 		formData.append('image', file)
 
@@ -48,7 +49,7 @@ export const profileAPI = {
 			}
 		})
 	},
-	saveProfile(profile) {
+	saveProfile(profile: ProfileType) {
 		return instance.put(`profile`, profile)
 	}
 }
@@ -57,7 +58,7 @@ export const authAPI = {
 	setAuthUserData() {
 		return instance.get(`auth/me`)
 	},
-	login(email, password, rememberMe = false, captcha = null) {
+	login(email: string, password: string, rememberMe = false, captcha = null) {
 		return instance.post(`auth/login`, { email, password, rememberMe, captcha })
 	},
 	logout() {

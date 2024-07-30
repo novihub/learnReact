@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Navigate, NavLink } from 'react-router-dom';
-import userPNG from '../../assets/user.png';
-import classes from './Header.module.css';
+import React, { useState } from 'react'
+import { Navigate, NavLink } from 'react-router-dom'
+import userPNG from '../../assets/user.png'
+import classes from './Header.module.css'
 
-const Header = (props) => {
-	const [redirect, setRedirect] = useState(false);
+const Header = props => {
+	const [redirect, setRedirect] = useState(false)
 
-	const logout = () => {
-		props.logout();
-		setRedirect(true);
-	};
+	const logout = () => {	
+		props.logout()
+		setRedirect(true)
+	}
 
 	return (
 		<div className={classes.Header}>
@@ -30,7 +30,7 @@ const Header = (props) => {
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Header;
+export default Header
