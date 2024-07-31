@@ -52,7 +52,9 @@ type addMessageACActionType = {
 	newMessageBody: string
 }
 
-export const addMessageAC = (newMessageBody: string): addMessageACActionType => ({
+export const addMessageAC = (
+	newMessageBody: string
+): addMessageACActionType => ({
 	type: ADD_MESSAGE,
 	newMessageBody
 })

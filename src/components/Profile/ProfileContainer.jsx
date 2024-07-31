@@ -26,7 +26,7 @@ const ProfileContainer = ({
 	const [isOwner, setIsOwner] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	let {userId} = useParams()
+	let { userId } = useParams()
 
 	userId = userId || authorizedUserId
 

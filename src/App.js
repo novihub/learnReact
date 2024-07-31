@@ -7,17 +7,17 @@ import HeaderContainer from './components/Header/HeaderContainer'
 import Nav from './components/Nav/Nav'
 import { initializeApp } from './redux/app-reducer.ts'
 
-const DialogsContainer = lazy(() =>
-	import('./components/Dialogs/DialogsContainer')
+const DialogsContainer = lazy(
+	() => import('./components/Dialogs/DialogsContainer')
 )
-const ProfileContainer = lazy(() =>
-	import('./components/Profile/ProfileContainer')
+const ProfileContainer = lazy(
+	() => import('./components/Profile/ProfileContainer')
 )
 const Login = lazy(() => import('./components/Login/Login'))
 const UsersContainer = lazy(() => import('./components/Users/UsersContainer'))
 const MusicContainer = lazy(() => import('./components/Music/MusicContainer'))
-const SettingsContainer = lazy(() =>
-	import('./components/Settings/SettingsContainer')
+const SettingsContainer = lazy(
+	() => import('./components/Settings/SettingsContainer')
 )
 
 const App = ({ initialized, initializeApp }) => {

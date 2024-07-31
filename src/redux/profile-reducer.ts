@@ -1,8 +1,6 @@
 import { stopSubmit } from 'redux-form'
+import { PhotosType, PostType, ProfileType } from 'src/types/types'
 import { profileAPI } from '../api/api'
-import { PostType } from 'src/types/types'
-import { ProfileType } from 'src/types/types'
-import { PhotosType } from 'src/types/types'
 
 // Action types
 const ADD_POST = 'ADD_POST'
@@ -13,7 +11,6 @@ const SAVE_PHOTO = 'SAVE_PHOTO'
 const SAVE_PROFILE = 'SAVE_PROFILE'
 
 // Types
-
 
 type ProfilePageType = {
 	posts: Array<PostType>

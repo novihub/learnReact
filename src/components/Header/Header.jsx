@@ -6,7 +6,7 @@ import classes from './Header.module.css'
 const Header = props => {
 	const [redirect, setRedirect] = useState(false)
 
-	const logout = () => {	
+	const logout = () => {
 		props.logout()
 		setRedirect(true)
 	}

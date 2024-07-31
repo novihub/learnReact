@@ -6,7 +6,7 @@ const SET_USER_IMG = 'network/auth/SET_USER_IMG'
 const GET_CAPTCHA_URL = 'network/auth/GET_CAPTCHA_URL'
 
 type initialStateType = {
-	userId: number | null 
+	userId: number | null
 	email: string | null
 	login: string | null
 	isAuth: boolean
@@ -71,7 +71,9 @@ type getCaptchaUrlActionType = {
 	payload: { captchaUrl: string }
 }
 
-export const getCaptchaUrlAC = (captchaUrl: string): getCaptchaUrlActionType => ({
+export const getCaptchaUrlAC = (
+	captchaUrl: string
+): getCaptchaUrlActionType => ({
 	type: GET_CAPTCHA_URL,
 	payload: { captchaUrl }
 })
@@ -97,7 +99,8 @@ export const setAuthUserData = () => async (dispatch: Function) => {
 }
 
 export const login =
-	(email: string, password: string, rememberMe: boolean, captcha: any) => async (dispatch: any) => {
+	(email: string, password: string, rememberMe: boolean, captcha: any) =>
+	async (dispatch: any) => {
 		let res = await authAPI.login(email, password, rememberMe, captcha)
 		if (res.data.resultCode === 0) {
 			dispatch(setAuthUserData())
