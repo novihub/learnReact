@@ -1,28 +1,29 @@
 import { createSelector } from 'reselect'
+import { AppStateType } from './redux-store'
 
 export const getUsers = createSelector(
-	state => state.usersPage.users,
+	(state: AppStateType) => state.usersPage.users,
 	users => {
-		return users.filter((u: any) => true)
+		return users.filter(u => true)
 	}
 )
 
-export const getPageSize = (state: any) => {
+export const getPageSize = (state: AppStateType) => {
 	return state.usersPage.pageSize
 }
 
-export const getTotalUsersCount = (state: any) => {
+export const getTotalUsersCount = (state: AppStateType) => {
 	return state.usersPage.totalUsersCount
 }
 
-export const getCurrentPage = (state: any) => {
+export const getCurrentPage = (state: AppStateType) => {
 	return state.usersPage.currentPage
 }
 
-export const getIsFetching = (state: any) => {
+export const getIsFetching = (state: AppStateType) => {
 	return state.usersPage.isFetching
 }
 
-export const getFollowingInProgress = (state: any) => {
+export const getFollowingInProgress = (state: AppStateType) => {
 	return state.usersPage.followingInProgress
 }

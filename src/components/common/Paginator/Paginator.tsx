@@ -1,7 +1,14 @@
 import React from 'react'
 import classes from './Paginator.module.css'
 
-const Paginator = ({
+type PropsType = {
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+	onPageChanged: (PageNumber: number) => void
+}
+
+const Paginator: React.FC<PropsType> = ({
 	totalUsersCount,
 	pageSize,
 	currentPage,
@@ -9,7 +16,7 @@ const Paginator = ({
 }) => {
 	let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
-	let pages = []
+	let pages: Array<number> = []
 
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i)
@@ -25,7 +32,7 @@ const Paginator = ({
 		<div className={classes.PageNumbers}>
 			{slicedPages.map(p => (
 				<span
-					onClick={e => onPageChanged(p)}
+					onClick={() => onPageChanged(p)}
 					className={`${classes.PageNumber} ${
 						currentPage === p ? classes.selectedPage : ''
 					}`}
