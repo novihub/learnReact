@@ -36,7 +36,7 @@ export const profileAPI = {
 	getStatus(userID: number) {
 		return instance.get(`profile/status/` + userID)
 	},
-	updateStatus(status: number) {
+	updateStatus(status: string) {
 		return instance.put(`profile/status`, { status })
 	},
 	savePhoto(file: any) {
@@ -54,12 +54,41 @@ export const profileAPI = {
 	}
 }
 
+export enum ResultCodeEnum {
+	Success = 0,
+	Error = 1
+}
+
+type MeResponseType = {
+	data: {
+		id: number
+		email: string
+		login: string
+	}
+	resultCode: ResultCodeEnum
+	messages: Array<string>
+
+}
+
+type LoginResponseType = {
+	data: {
+		userId: number
+	}
+	resultCode: ResultCodeEnum
+	messages: Array<string>
+}
+
 export const authAPI = {
 	setAuthUserData() {
-		return instance.get(`auth/me`)
+		return instance.get<MeResponseType>(`auth/me`).then(res => res.data)
 	},
-	login(email: string, password: string, rememberMe = false, captcha = null) {
-		return instance.post(`auth/login`, { email, password, rememberMe, captcha })
+	login(
+		email: string,
+		password: string,
+		rememberMe = false,
+		captcha: null | string = null
+	) {
+		return instance.post<LoginResponseType>(`auth/login`, { email, password, rememberMe, captcha }).then(res => res.data)
 	},
 	logout() {
 		return instance.delete(`auth/login`)

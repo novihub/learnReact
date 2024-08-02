@@ -4,7 +4,7 @@ import { AppStateType } from './redux-store'
 export const getUsers = createSelector(
 	(state: AppStateType) => state.usersPage.users,
 	users => {
-		return users.filter(u => true)
+		return users.filter(u => u.photos?.large)
 	}
 )
 

@@ -1,17 +1,18 @@
 import {
+	AnyAction,
 	applyMiddleware,
 	combineReducers,
 	legacy_createStore as createStore
 } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import thunk from 'redux-thunk'
-import appReducer from './app-reducer.js'
-import authReducer from './auth-reducer.js'
-import dialogsReducer from './dialogs-reducer.js'
-import profileReducer from './profile-reducer.js'
-import usersReducer from './users-reducer.js'
+import thunk, { ThunkMiddleware } from 'redux-thunk'
+import appReducer from './app-reducer'
+import authReducer from './auth-reducer'
+import dialogsReducer from './dialogs-reducer'
+import profileReducer from './profile-reducer'
+import usersReducer from './users-reducer'
 
-let reducers = combineReducers({
+const rootReducer = combineReducers({
 	profilePage: profileReducer,
 	dialogsPage: dialogsReducer,
 	usersPage: usersReducer,
@@ -20,13 +21,25 @@ let reducers = combineReducers({
 	app: appReducer
 })
 
-type ReducersType = typeof reducers
-export type AppStateType = ReturnType<ReducersType>
+export type AppStateType = ReturnType<typeof rootReducer>
 
+// Utility types to infer action types from reducers
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
+export type InferActionsTypes<T> = T extends {
+	[keys: string]: (...args: any[]) => infer U
+}
+	? U
+	: never
 
-let store = createStore(reducers, applyMiddleware(thunk))
+const store = createStore(
+	rootReducer,
+	applyMiddleware(thunk as ThunkMiddleware<AppStateType, AnyAction>)
+)
 
-// @ts-ignore
-window.store = store
+// Exposing store to the window object for debugging
+if (process.env.NODE_ENV === 'development') {
+	// @ts-ignore
+	window.store = store
+}
 
 export default store

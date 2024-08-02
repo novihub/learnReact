@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form'
-import { authAPI, profileAPI, securityAPI } from '../api/api'
+import { authAPI, profileAPI, ResultCodeEnum, securityAPI } from '../api/api'
 
 const SET_USER_DATA = 'network/auth/SET_USER_DATA'
 const SET_USER_IMG = 'network/auth/SET_USER_IMG'
@@ -90,8 +90,8 @@ export const setUserImg = (avatar: any): setUserImgActionType => ({
 
 export const setAuthUserData = () => async (dispatch: Function) => {
 	const authRes = await authAPI.setAuthUserData()
-	if (authRes.data.resultCode === 0) {
-		const { id, login, email } = authRes.data.data
+	if (authRes.resultCode === ResultCodeEnum.Success) {
+		const { id, login, email } = authRes.data
 		dispatch(setAuthUserDataAC(id, email, login, true))
 		const profileRes = await profileAPI.getProfile(id)
 		dispatch(setUserImg(profileRes.data.photos.small))
@@ -102,14 +102,14 @@ export const login =
 	(email: string, password: string, rememberMe: boolean, captcha: any) =>
 	async (dispatch: any) => {
 		let res = await authAPI.login(email, password, rememberMe, captcha)
-		if (res.data.resultCode === 0) {
+		if (res.resultCode === ResultCodeEnum.Success) {
 			dispatch(setAuthUserData())
 		} else {
-			if (res.data.resultCode === 1) {
+			if (res.resultCode === 1) {
 				dispatch(getCaptchaURL())
 			}
 			let message =
-				res.data.messages.length > 0 ? res.data.messages[0] : 'Invalid'
+				res.messages.length > 0 ? res.messages[0] : 'Invalid'
 			dispatch(stopSubmit('login', { _error: message }))
 		}
 	}
