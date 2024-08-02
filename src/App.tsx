@@ -9,10 +9,10 @@ import { initializeApp } from './redux/app-reducer'
 import { AppStateType } from './redux/redux-store'
 
 interface OwnPropsType {
-	logout: () => void
-	avatar: string
+	logout: () => Promise<void>
+	avatar: string | null
 	isAuth: boolean
-	login: string
+	login: string | null
 }
 
 const DialogsContainer = lazy(
@@ -60,14 +60,7 @@ const App: React.FC<Props> = ({
 
 	return (
 		<div className={classes.App}>
-			<HeaderContainer
-				logout={function (): void {
-					throw new Error('Function not implemented.')
-				}}
-				avatar={''}
-				isAuth={false}
-				login={null}
-			/>
+			<HeaderContainer />
 			<Nav />
 			<div className={classes.AppContent}>
 				<Suspense fallback={<Preloader />}>

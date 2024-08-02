@@ -1,39 +1,50 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import userPNG from '../../assets/user.png'
-import classes from './Header.module.css'
+import { connect, ConnectedProps } from 'react-redux'
+import { logout } from '../../redux/auth-reducer'
+import { AppStateType } from '../../redux/redux-store'
+import Header from './Header'
 
-type OwnPropsType = {
-	logout: () => void
-	avatar: string
+// Define the interface for the props from mapStateToProps
+interface MapStatePropsType {
 	isAuth: boolean
 	login: string | null
+	avatar: string | null
 }
 
-const Header: React.FC<OwnPropsType> = props => {
-	const logout = () => {
-		props.logout()
+// Use ConnectedProps to get the types from connect
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+	isAuth: state.auth.isAuth,
+	login: state.auth.login,
+	avatar: state.auth.avatar
+})
+
+const mapDispatchToProps = {
+	logout
+}
+
+// Combine the props from mapStateToProps and mapDispatchToProps
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type HeaderContainerProps = PropsFromRedux
+
+class HeaderContainer extends React.Component<HeaderContainerProps> {
+	// componentDidMount() {
+	//   this.props.setAuthUserData();
+	// }
+
+	render() {
+		const { logout, avatar, isAuth, login } = this.props
+		return (
+			<Header
+				logout={logout}
+				avatar={avatar}
+				isAuth={isAuth}
+				login={login || ''}
+			/>
+		)
 	}
-
-	return (
-		<div className={classes.Header}>
-			<div className={classes.loginBlock}>
-				{props.avatar ? (
-					<img src={props.avatar} alt='User Avatar' />
-				) : (
-					<img src={userPNG} alt='Default Avatar' />
-				)}
-				{props.isAuth ? (
-					<div className={classes.logout}>
-						{props.login || 'Guest'} {/* Default value if login is null */}
-						<button onClick={logout}>Logout</button>
-					</div>
-				) : (
-					<NavLink to='/login'>Login</NavLink>
-				)}
-			</div>
-		</div>
-	)
 }
 
-export default Header
+export default connector(HeaderContainer)

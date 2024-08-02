@@ -1,18 +1,11 @@
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/profile-reducer'
-import { AppStateType } from '../../../redux/redux-store' 
-import { PostType } from '../../../types/types'
+import { AppStateType } from '../../../redux/redux-store'
 import MyPosts from './MyPosts'
 
-type MapStateToPropsType = {
-	posts: PostType[]
-}
+type MapStateToPropsType = {}
 
 type MyPostsProps = {
-	posts: PostType[]
-	newPostText: string
-	addPost: (newPostText: string) => void
-	deletePost: (postId: number) => void
 	isOwner: boolean
 }
 
