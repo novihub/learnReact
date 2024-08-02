@@ -15,8 +15,8 @@ let initialState = {
 	email: null as string | null,
 	login: null as string | null,
 	isAuth: false,
-	avatar: null as any,
-	captchaUrl: null as string | null
+	captchaUrl: null as string | null,
+	avatar: null as any
 }
 
 const authReducer = (
@@ -27,8 +27,10 @@ const authReducer = (
 		case 'network/auth/SET_USER_DATA':
 			return {
 				...state,
-				...action.payload,
-				isAuth: action.payload.isAuth
+				userId: action.userId,
+				email: action.email,
+				login: action.login,
+				isAuth: action.isAuth
 			}
 		case 'network/auth/SET_USER_IMG':
 			return {
@@ -38,7 +40,7 @@ const authReducer = (
 		case 'network/auth/GET_CAPTCHA_URL':
 			return {
 				...state,
-				...action.payload
+				captchaUrl: action.captchaUrl
 			}
 		default:
 			return state
@@ -54,12 +56,15 @@ const actions = {
 	) =>
 		({
 			type: 'network/auth/SET_USER_DATA',
-			payload: { userId, email, login, isAuth }
+			userId,
+			email,
+			login,
+			isAuth
 		}) as const,
 	getCaptchaUrlAC: (captchaUrl: string) =>
 		({
 			type: 'network/auth/GET_CAPTCHA_URL',
-			payload: { captchaUrl }
+			captchaUrl
 		}) as const,
 	setUserImg: (avatar: any) =>
 		({
@@ -118,14 +123,14 @@ export const login =
 		}
 	}
 
-export const logout = (): ThunkType => async (dispatch) => {
+export const logout = (): ThunkType => async dispatch => {
 	let res = await authAPI.logout()
 	if (res.data.resultCode === 0) {
 		dispatch(actions.setAuthUserDataAC(null, null, null, false))
 	}
 }
 
-export const getCaptchaURL = (): ThunkType => async (dispatch) => {
+export const getCaptchaURL = (): ThunkType => async dispatch => {
 	let data = await securityAPI.getCaptchaUrl()
 	const captchaUrl = data.url
 

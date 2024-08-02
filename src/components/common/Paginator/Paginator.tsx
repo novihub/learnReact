@@ -32,6 +32,7 @@ const Paginator: React.FC<PropsType> = ({
 		<div className={classes.PageNumbers}>
 			{slicedPages.map(p => (
 				<span
+					key={p}
 					onClick={() => onPageChanged(p)}
 					className={`${classes.PageNumber} ${
 						currentPage === p ? classes.selectedPage : ''

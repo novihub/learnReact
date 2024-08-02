@@ -1,7 +1,12 @@
 import React from 'react';
 import classes from './Message.module.css'
 
-const Message = props => {
+interface OwnPropsType {
+	id: number
+	message: string
+}
+
+const Message: React.FC<OwnPropsType> = props => {
 
 	return (
 		<div className={classes.Message}>

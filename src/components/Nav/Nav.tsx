@@ -1,9 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { ConnectedProps, connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { AppStateType } from '../../redux/redux-store'
 import classes from './Nav.module.css'
 
-const Nav = ({ userId }) => {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const Nav: React.FC<PropsFromRedux> = ({ userId }) => {
 	return (
 		<div className={classes.Nav}>
 			<ul>
@@ -31,8 +34,10 @@ const Nav = ({ userId }) => {
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
 	userId: state.auth.userId
 })
 
-export default connect(mapStateToProps, {})(Nav)
+const connector = connect(mapStateToProps)
+
+export default connector(Nav)

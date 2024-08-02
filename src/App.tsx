@@ -1,11 +1,19 @@
-import React, { lazy, startTransition, Suspense, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { useNavigate, Route, Routes } from 'react-router-dom'
+import React, { Suspense, lazy, startTransition, useEffect } from 'react'
+import { ConnectedProps, connect } from 'react-redux'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import classes from './App.module.css'
-import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Nav from './components/Nav/Nav'
-import { initializeApp } from './redux/app-reducer.ts'
+import Preloader from './components/common/Preloader/Preloader'
+import { initializeApp } from './redux/app-reducer'
+import { AppStateType } from './redux/redux-store'
+
+interface OwnPropsType {
+	logout: () => void
+	avatar: string
+	isAuth: boolean
+	login: string
+}
 
 const DialogsContainer = lazy(
 	() => import('./components/Dialogs/DialogsContainer')
@@ -20,7 +28,18 @@ const SettingsContainer = lazy(
 	() => import('./components/Settings/SettingsContainer')
 )
 
-const App = ({ initialized, initializeApp }) => {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & OwnPropsType
+
+const App: React.FC<Props> = ({
+	initialized,
+	initializeApp,
+	logout,
+	avatar,
+	isAuth,
+	login
+}) => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
@@ -41,7 +60,14 @@ const App = ({ initialized, initializeApp }) => {
 
 	return (
 		<div className={classes.App}>
-			<HeaderContainer />
+			<HeaderContainer
+				logout={function (): void {
+					throw new Error('Function not implemented.')
+				}}
+				avatar={''}
+				isAuth={false}
+				login={null}
+			/>
 			<Nav />
 			<div className={classes.AppContent}>
 				<Suspense fallback={<Preloader />}>
@@ -59,10 +85,12 @@ const App = ({ initialized, initializeApp }) => {
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
 	initialized: state.app.initialized
 })
 
-export default connect(mapStateToProps, {
+const connector = connect(mapStateToProps, {
 	initializeApp
-})(App)
+})
+
+export default connector(App)

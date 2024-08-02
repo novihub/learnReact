@@ -1,10 +1,20 @@
 import React from 'react'
+import { initialStateType } from '../../redux/dialogs-reducer'
 import AddMessageFormRedux from './AddMessageForm/AddMessageForm'
 import Dialog from './Dialog/Dialog'
 import classes from './Dialogs.module.css'
 import Message from './Message/Message'
 
-const Dialogs = props => {
+export type NewMessageFormType = {
+	newMessageBody: string
+}
+
+type OwnPropsType = {
+	dialogsPage: initialStateType
+	addMessage: (messageText: string) => void
+}
+
+const Dialogs: React.FC<OwnPropsType> = props => {
 	const getDialogs = props.dialogsPage.dialogs.map(d => (
 		<Dialog key={d.id} name={d.name} id={d.id} />
 	))
@@ -13,7 +23,7 @@ const Dialogs = props => {
 		<Message key={m.id} message={m.message} id={m.id} />
 	))
 
-	const addNewMessage = values => {
+	const addNewMessage = (values: { newMessageBody: string }) => {
 		props.addMessage(values.newMessageBody)
 	}
 

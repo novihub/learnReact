@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Music = props => {
+interface MusicProps {}
+
+const Music: React.FC<MusicProps> = props => {
 	return <div>Music</div>
 }
 

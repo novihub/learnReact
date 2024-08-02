@@ -1,28 +1,31 @@
-import React, { useState } from 'react'
-import { Navigate, NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import userPNG from '../../assets/user.png'
 import classes from './Header.module.css'
 
-const Header = props => {
-	const [redirect, setRedirect] = useState(false)
+type OwnPropsType = {
+	logout: () => void
+	avatar: string
+	isAuth: boolean
+	login: string | null
+}
 
+const Header: React.FC<OwnPropsType> = props => {
 	const logout = () => {
 		props.logout()
-		setRedirect(true)
 	}
 
 	return (
 		<div className={classes.Header}>
-			{redirect && <Navigate to='/login' />}
 			<div className={classes.loginBlock}>
 				{props.avatar ? (
-					<img src={props.avatar} alt='' />
+					<img src={props.avatar} alt='User Avatar' />
 				) : (
-					<img src={userPNG} alt='' />
+					<img src={userPNG} alt='Default Avatar' />
 				)}
 				{props.isAuth ? (
 					<div className={classes.logout}>
-						{props.login}
+						{props.login || 'Guest'} {/* Default value if login is null */}
 						<button onClick={logout}>Logout</button>
 					</div>
 				) : (

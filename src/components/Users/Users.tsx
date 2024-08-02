@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import { UserType } from '../../types/types'
 import Paginator from '../common/Paginator/Paginator'
 import User from './User/User'
@@ -42,6 +42,7 @@ const Users: FC<PropsType> = ({
 			<div className={classes.Users}>
 				{props.users.map(u => (
 					<User
+						key={u.id}
 						user={u}
 						follow={props.follow}
 						unfollow={props.unfollow}

@@ -9,10 +9,24 @@ import {
 	setUserProfile,
 	updateStatus
 } from '../../redux/profile-reducer'
+import { AppStateType } from '../../redux/redux-store'
+import { ProfileType } from '../../types/types'
 import Preloader from '../common/Preloader/Preloader'
 import Profile from './Profile'
 
-const ProfileContainer = ({
+interface ProfileContainerProps {
+	profile: ProfileType | null
+	status: string
+	authorizedUserId: number | null
+	isAuth: boolean
+	setUserProfile: (userId: number) => Promise<void>
+	getStatus: (userId: number) => Promise<void>
+	updateStatus: (status: string) => Promise<void>
+	savePhoto: (file: any) => Promise<void>
+	saveProfile: (profile: ProfileType) => Promise<void>
+}
+
+const ProfileContainer: React.FC<ProfileContainerProps> = ({
 	setUserProfile,
 	getStatus,
 	profile,
@@ -26,27 +40,28 @@ const ProfileContainer = ({
 	const [isOwner, setIsOwner] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	let { userId } = useParams()
-
-	userId = userId || authorizedUserId
+	const { userId } = useParams()
+	const userIdNumber = userId ? parseInt(userId, 10) : null
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				setIsLoading(true)
-				await setUserProfile(userId)
-				await getStatus(userId)
-				setIsOwner(String(userId) === String(authorizedUserId))
+				if (userIdNumber) {
+					await setUserProfile(userIdNumber)
+					const status = await getStatus(userIdNumber)
+					setIsOwner(userIdNumber === authorizedUserId)
+				}
 			} finally {
 				setIsLoading(false)
 			}
 		}
-		if (userId) {
+		if (userIdNumber) {
 			fetchData()
 		}
-	}, [userId, setUserProfile, getStatus, authorizedUserId])
+	}, [userIdNumber, setUserProfile, getStatus, authorizedUserId])
 
-	if (!isAuth && !userId) {
+	if (!isAuth && userIdNumber) {
 		return <Navigate to='/login' />
 	}
 
@@ -68,7 +83,7 @@ const ProfileContainer = ({
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
 	profile: state.profilePage.profile,
 	status: state.profilePage.status,
 	authorizedUserId: state.auth.userId,

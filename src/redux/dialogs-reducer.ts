@@ -53,7 +53,7 @@ let dialogsReducer = (
 }
 
 export const actions = {
-	addMessageAC: (newMessageBody: string) =>
+	addMessage: (newMessageBody: string) =>
 		({
 			type: 'dialogs-page/ADD_MESSAGE',
 			newMessageBody
