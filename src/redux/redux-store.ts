@@ -1,11 +1,12 @@
 import {
+	Action,
 	AnyAction,
 	applyMiddleware,
 	combineReducers,
 	legacy_createStore as createStore
 } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import thunk, { ThunkMiddleware } from 'redux-thunk'
+import thunk, { ThunkAction, ThunkMiddleware } from 'redux-thunk'
 import appReducer from './app-reducer'
 import authReducer from './auth-reducer'
 import dialogsReducer from './dialogs-reducer'
@@ -24,12 +25,18 @@ const rootReducer = combineReducers({
 export type AppStateType = ReturnType<typeof rootReducer>
 
 // Utility types to infer action types from reducers
-type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type InferActionsTypes<T> = T extends {
 	[keys: string]: (...args: any[]) => infer U
 }
 	? U
 	: never
+
+export type BasedThunkType<A extends Action, R = Promise<void>> = ThunkAction<
+	R,
+	AppStateType,
+	unknown,
+	A
+>
 
 const store = createStore(
 	rootReducer,

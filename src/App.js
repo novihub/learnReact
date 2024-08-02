@@ -1,6 +1,6 @@
 import React, { lazy, startTransition, Suspense, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { useNavigate, Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
 import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
@@ -21,11 +21,19 @@ const SettingsContainer = lazy(
 )
 
 const App = ({ initialized, initializeApp }) => {
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		startTransition(() => {
 			initializeApp()
 		})
 	}, [initializeApp])
+
+	useEffect(() => {
+		if (!initialized) {
+			navigate('/login', { replace: true })
+		}
+	}, [initialized, navigate])
 
 	if (!initialized) {
 		return <Preloader />
@@ -38,7 +46,6 @@ const App = ({ initialized, initializeApp }) => {
 			<div className={classes.AppContent}>
 				<Suspense fallback={<Preloader />}>
 					<Routes>
-						<Route path='/' element={<Navigate to='login' replace />} />
 						<Route path='/profile/:userId' element={<ProfileContainer />} />
 						<Route path='/messages/*' element={<DialogsContainer />} />
 						<Route path='/users' element={<UsersContainer />} />
