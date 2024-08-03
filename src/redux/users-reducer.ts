@@ -112,6 +112,7 @@ const _toggleFollowFlow = async (
 ) => {
 	dispatch(actions.toggleFollowingProgress(true, userID))
 	const res = await apiMethod
+	console.log(res.data)
 	if (res.data.resultCode === 0) dispatch(actionCreator(userID))
 	dispatch(actions.toggleFollowingProgress(false, userID))
 }
@@ -119,7 +120,7 @@ const _toggleFollowFlow = async (
 export const follow =
 	(userID: number): ThunkType =>
 	async dispatch => {
-		console.log('follow')
+		console.log('Dispatching follow action for userID:', userID)
 		await _toggleFollowFlow(
 			dispatch,
 			userID,
@@ -131,7 +132,7 @@ export const follow =
 export const unfollow =
 	(userID: number): ThunkType =>
 	async dispatch => {
-		console.log('unfollow')
+		console.log('Dispatching unfollow action for userID:', userID)
 		await _toggleFollowFlow(
 			dispatch,
 			userID,

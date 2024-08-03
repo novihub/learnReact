@@ -7,15 +7,13 @@ export const usersAPI = {
 			.then(res => res.data)
 	},
 	follow(userID: number) {
-		return instance
-			.post<ResponseType>(
-				`https://social-network.samuraijs.com/api/1.0/follow/${userID}`
-			)
-			.then(res => res.data)
+		return instance.post<ResponseType>(
+			`https://social-network.samuraijs.com/api/1.0/follow/${userID}`
+		)
 	},
 	unfollow(userID: number) {
-		return instance
-			.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`)
-			.then(res => res.data) as Promise<ResponseType>
+		return instance.delete(
+			`https://social-network.samuraijs.com/api/1.0/follow/${userID}`
+		)
 	}
 }
