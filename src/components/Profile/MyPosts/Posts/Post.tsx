@@ -1,11 +1,12 @@
+import React from 'react'
+import classes from './Post.module.css'
+
 type PostProps = {
 	id: number
 	message: string
 	likesCount: number
 	deletePost: (postId: number) => void
 }
-import React from 'react'
-import classes from './Post.module.css'
 
 const Post: React.FC<PostProps> = props => {
 	return (
