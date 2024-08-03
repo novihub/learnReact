@@ -22,7 +22,7 @@ const ProfileContainer = lazy(
 	() => import('./components/Profile/ProfileContainer')
 )
 const Login = lazy(() => import('./components/Login/Login'))
-const UsersContainer = lazy(() => import('./components/Users/UsersContainer'))
+const UsersPage = lazy(() => import('./components/Users/UsersPage'))
 const MusicContainer = lazy(() => import('./components/Music/MusicContainer'))
 const SettingsContainer = lazy(
 	() => import('./components/Settings/SettingsContainer')
@@ -67,7 +67,7 @@ const App: React.FC<Props> = ({
 					<Routes>
 						<Route path='/profile/:userId' element={<ProfileContainer />} />
 						<Route path='/messages/*' element={<DialogsContainer />} />
-						<Route path='/users' element={<UsersContainer />} />
+						<Route path='/users' element={<UsersPage />} />
 						<Route path='/music' element={<MusicContainer />} />
 						<Route path='/settings' element={<SettingsContainer />} />
 						<Route path='/login' element={<Login />} />

@@ -11,7 +11,7 @@ import Users from './Users'
 
 interface UsersPageProps {}
 
-const UsersContainer: React.FC<UsersPageProps> = () => {
+const UsersPage: React.FC<UsersPageProps> = () => {
 	const isFetching = useSelector(getIsFetching)
 	const currentPage = useSelector(getCurrentPage)
 	const pageSize = useSelector(getPageSize)
@@ -25,7 +25,7 @@ const UsersContainer: React.FC<UsersPageProps> = () => {
 	return <>{isFetching ? <Preloader /> : <Users />}</>
 }
 
-export default UsersContainer
+export default UsersPage
 
 // class UsersContainer extends React.Component<PropsType> {
 // 	componentDidMount() {
