@@ -15,6 +15,13 @@ type initialStateType = {
 	currentPage: number
 	isFetching: boolean
 	followingInProgress: Array<number> // array of userId
+	filter: FilterType
+}
+
+// export type initialStateType = typeof initialState
+export type FilterType = {
+	term: string
+	isFollowed: null | boolean
 }
 
 const initialState: initialStateType = {
@@ -23,7 +30,11 @@ const initialState: initialStateType = {
 	totalUsersCount: 0,
 	currentPage: 1,
 	isFetching: false,
-	followingInProgress: []
+	followingInProgress: [],
+	filter: {
+		term: '',
+		isFollowed: null as boolean | null
+	}
 }
 
 const usersReducer = (
@@ -72,6 +83,11 @@ const usersReducer = (
 					? [...state.followingInProgress, action.userID]
 					: state.followingInProgress.filter(id => id !== action.userID)
 			}
+		case 'SET_FILTER':
+			return {
+				...state,
+				filter: action.payload
+			}
 		default:
 			return state
 	}
@@ -90,14 +106,23 @@ export const actions = {
 	toggleIsFetching: (isFetching: boolean) =>
 		({ type: 'TOGGLE_IS_FETCHING', isFetching }) as const,
 	toggleFollowingProgress: (isFetching: boolean, userID: number) =>
-		({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userID }) as const
+		({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userID }) as const,
+	setFilter: (term: string, isFollowed: boolean | null) =>
+		({ type: 'SET_FILTER', payload: { term, isFollowed } }) as const
 }
 
 export const getUsersAPI =
-	(page: number, pageSize: number): ThunkType =>
+	(
+		page: number,
+		pageSize: number,
+		term: string,
+		isFollowed: boolean | null
+	): ThunkType =>
 	async dispatch => {
 		dispatch(actions.toggleIsFetching(true))
-		const data = await usersAPI.getUsers(page, pageSize)
+		dispatch(actions.setFilter(term, isFollowed))
+
+		const data = await usersAPI.getUsers(page, pageSize, term, isFollowed)
 		dispatch(actions.toggleIsFetching(false))
 		dispatch(actions.setUsers(data.items))
 		dispatch(actions.setTotalUsersCount(data.totalCount))

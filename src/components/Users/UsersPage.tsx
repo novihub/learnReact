@@ -19,7 +19,7 @@ const UsersPage: React.FC<UsersPageProps> = () => {
 	const dispatch = useDispatch()
 	
 	useEffect(() => {
-		dispatch(getUsersAPI(currentPage, pageSize))
+		dispatch(getUsersAPI(currentPage, pageSize, '', null))
 	}, [])
 
 	return <>{isFetching ? <Preloader /> : <Users />}</>
