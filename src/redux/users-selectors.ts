@@ -9,5 +9,4 @@ export const getTotalUsersCount = (state: AppStateType) => state.usersPage.total
 export const getCurrentPage = (state: AppStateType) => state.usersPage.currentPage;
 export const getIsFetching = (state: AppStateType) => state.usersPage.isFetching;
 export const getFollowingInProgress = (state: AppStateType) => state.usersPage.followingInProgress;
-export const getTerm = (state: AppStateType) => state.usersPage.filter.term
-export const getFollowedUsers = (state: AppStateType) => state.usersPage.filter.isFollowed
+export const getFilter = (state: AppStateType) => state.usersPage.filter

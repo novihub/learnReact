@@ -1,75 +1,100 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsersAPI } from '../../redux/users-reducer'
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FilterType, getUsersAPI } from '../../redux/users-reducer';
 import {
-	getCurrentPage,
-	getIsFetching,
-	getPageSize
-} from '../../redux/users-selectors'
-import Preloader from '../common/Preloader/Preloader'
-import Users from './Users'
+    getCurrentPage,
+    getFilter,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from '../../redux/users-selectors';
+import Paginator from '../common/Paginator/Paginator';
+import User from './User/User';
+import classes from './Users.module.css';
+import UsersSearchForm from './UsersSearchForm';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-interface UsersPageProps {}
+interface PropsType {}
 
-const UsersPage: React.FC<UsersPageProps> = () => {
-	const isFetching = useSelector(getIsFetching)
-	const currentPage = useSelector(getCurrentPage)
-	const pageSize = useSelector(getPageSize)
+const Users: FC<PropsType> = () => {
+    const totalUsersCount = useSelector(getTotalUsersCount);
+    const currentPage = useSelector(getCurrentPage);
+    const pageSize = useSelector(getPageSize);
+    const users = useSelector(getUsers);
+    const filter = useSelector(getFilter);
 
-	const dispatch = useDispatch()
-	
-	useEffect(() => {
-		dispatch(getUsersAPI(currentPage, pageSize, '', null))
-	}, [])
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-	return <>{isFetching ? <Preloader /> : <Users />}</>
-}
+    useEffect(() => {
+        const params = new URLSearchParams();
+        params.set('page', String(currentPage));
+        params.set('count', String(pageSize));
+        params.set('term', filter.term);
+        params.set('friend', String(filter.isFollowed));
+        
+        navigate({
+            pathname: '/users',
+            search: params.toString()
+        });
+    }, [filter, currentPage, pageSize, navigate]);
 
-export default UsersPage
+    useEffect(() => {
+        const query = new URLSearchParams(location.search);
+        let actualPage = currentPage;
+        let actualFilter = filter;
+        const queryFriend = query.get('friend');
+        const queryPage = query.get('page');
+        const queryTerm = query.get('term');
 
-// class UsersContainer extends React.Component<PropsType> {
-// 	componentDidMount() {
-// 		const { currentPage, pageSize } = this.props
-// 		this.props.getUsersAPI(currentPage, pageSize)
-// 	}
+        if (queryPage) actualPage = +queryPage;
+        if (queryTerm) actualFilter = { ...actualFilter, term: queryTerm };
 
-// 	render() {
-// 		return (
-// 			<>
-// 				{this.props.isFetching ? (
-// 					<Preloader />
-// 				) : (
-// 					<Users
-// 						// users={this.props.users}
-// 						// follow={this.props.follow}
-// 						// unfollow={this.props.unfollow}
-// 						// followingInProgress={this.props.followingInProgress}
-// 					/>
-// 				)}
-// 			</>
-// 		)
-// 	}
-// }
+        switch (queryFriend) {
+            case 'null':
+                actualFilter = { ...actualFilter, isFollowed: null };
+                break;
+            case 'true':
+                actualFilter = { ...actualFilter, isFollowed: true };
+                break;
+            case 'false':
+                actualFilter = { ...actualFilter, isFollowed: false };
+                break;
+            default:
+                break;
+        }
 
-// let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-// 	return {
-// 		users: getUsers(state),
-// 		pageSize: getPageSize(state),
-// 		totalUsersCount: getTotalUsersCount(state),
-// 		currentPage: getCurrentPage(state),
-// 		isFetching: getIsFetching(state),
-// 		followingInProgress: getFollowingInProgress(state)
-// 	}
-// }
+        dispatch(getUsersAPI(actualPage, pageSize, actualFilter));
+    }, [location.search, dispatch]);
 
-// export default compose(
-// 	// <TStateProps = {}, no_dispatch = {}, TOwnProps = {}, State = DefaultState>
-// 	connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
-// 		mapStateToProps,
-// 		{
-// 			follow,
-// 			unfollow,
-// 			getUsersAPI
-// 		}
-// 	)
-// )(UsersContainer)
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(getUsersAPI(pageNumber, pageSize, filter));
+    };
+
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(getUsersAPI(1, pageSize, filter));
+    };
+
+    return (
+        <div>
+            <div>
+                <h1>Search</h1>
+                <UsersSearchForm onFilterChanged={onFilterChanged} filter={filter} />
+            </div>
+            <div className={classes.Users}>
+                {users.map(u => (
+                    <User key={u.id} user={u} />
+                ))}
+            </div>
+            <Paginator
+                totalUsersCount={totalUsersCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChanged={onPageChanged}
+            />
+        </div>
+    );
+};
+
+export default Users;

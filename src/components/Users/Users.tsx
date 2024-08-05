@@ -1,44 +1,42 @@
 import React, { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FilterType, getUsersAPI } from '../../redux/users-reducer'
-import {
-	getCurrentPage,
-	getFollowedUsers,
-	getPageSize,
-	getTerm,
-	getTotalUsersCount,
-	getUsers
-} from '../../redux/users-selectors'
+import { UserType } from '../../types/types'
 import Paginator from '../common/Paginator/Paginator'
 import User from './User/User'
 import classes from './Users.module.css'
 import UsersSearchForm from './UsersSearchForm'
 
-interface PropsType {}
+interface PropsType {
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+	users: UserType[]
+	filter: FilterType
+}
 
-const Users: FC<PropsType> = () => {
-	const totalUsersCount = useSelector(getTotalUsersCount)
-	const currentPage = useSelector(getCurrentPage)
-	const pageSize = useSelector(getPageSize)
-	const users = useSelector(getUsers)
-	const term = useSelector(getTerm)
-	const isFollowed = useSelector(getFollowedUsers)
-
+const Users: FC<PropsType> = ({
+	totalUsersCount,
+	filter,
+	users,
+	pageSize,
+	currentPage
+}) => {
 	const dispatch = useDispatch()
 
 	const onPageChanged = (pageNumber: number) => {
-		dispatch(getUsersAPI(pageNumber, pageSize, term, isFollowed))
+		dispatch(getUsersAPI(pageNumber, pageSize, filter))
 	}
 
 	const onFilterChanged = (filter: FilterType) => {
-		dispatch(getUsersAPI(1, pageSize, filter.term, filter.isFollowed))
+		dispatch(getUsersAPI(1, pageSize, filter))
 	}
 
 	return (
 		<div>
 			<div>
 				<h1>Search</h1>
-				<UsersSearchForm onFilterChanged={onFilterChanged} term={term} isFollowed={isFollowed}/>
+				<UsersSearchForm onFilterChanged={onFilterChanged} filter={filter} />
 			</div>
 			<div className={classes.Users}>
 				{users.map(u => (

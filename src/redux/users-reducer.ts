@@ -107,26 +107,25 @@ export const actions = {
 		({ type: 'TOGGLE_IS_FETCHING', isFetching }) as const,
 	toggleFollowingProgress: (isFetching: boolean, userID: number) =>
 		({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userID }) as const,
-	setFilter: (term: string, isFollowed: boolean | null) =>
-		({ type: 'SET_FILTER', payload: { term, isFollowed } }) as const
+	setFilter: (filter: FilterType) =>
+		({ type: 'SET_FILTER', payload: filter }) as const
 }
 
 export const getUsersAPI =
 	(
 		page: number,
 		pageSize: number,
-		term: string,
-		isFollowed: boolean | null
+		filter: FilterType
 	): ThunkType =>
 	async dispatch => {
 		dispatch(actions.toggleIsFetching(true))
-		dispatch(actions.setFilter(term, isFollowed))
+		dispatch(actions.setFilter(filter))
 
-		const data = await usersAPI.getUsers(page, pageSize, term, isFollowed)
-		dispatch(actions.toggleIsFetching(false))
+		const data = await usersAPI.getUsers(page, pageSize, filter)
 		dispatch(actions.setUsers(data.items))
 		dispatch(actions.setTotalUsersCount(data.totalCount))
 		dispatch(actions.setCurrentPage(page))
+		dispatch(actions.toggleIsFetching(false))
 	}
 
 const _toggleFollowFlow = async (

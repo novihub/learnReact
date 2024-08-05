@@ -20,14 +20,12 @@ const UsersSearchFormValidate = (values: any) => {
 
 type UsersSearchFormPropsType = {
 	onFilterChanged: (filter: FilterType) => void
-	term: string
-	isFollowed: boolean | null
+	filter: FilterType
 }
 
 const UsersSearchForm: React.FC<UsersSearchFormPropsType> = ({
 	onFilterChanged,
-	term,
-	isFollowed
+	filter
 }) => {
 	const submit = (
 		values: FilterType,
@@ -40,7 +38,7 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = ({
 	return (
 		<div>
 			<Formik
-				initialValues={{ term, isFollowed }}
+				initialValues={{...filter}}
 				validate={UsersSearchFormValidate}
 				onSubmit={submit}
 			>

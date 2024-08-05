@@ -32,31 +32,24 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & OwnPropsType
 
-const App: React.FC<Props> = ({
-	initialized,
-	initializeApp,
-	logout,
-	avatar,
-	isAuth,
-	login
-}) => {
-	const navigate = useNavigate()
+const App: React.FC<Props> = ({ initialized, initializeApp }) => {
+	// const navigate = useNavigate()
 
-	useEffect(() => {
-		startTransition(() => {
-			initializeApp()
-		})
-	}, [initializeApp])
+	// useEffect(() => {
+	// 	startTransition(() => {
+	// 		initializeApp()
+	// 	})
+	// }, [initializeApp])
 
-	useEffect(() => {
-		if (!initialized) {
-			navigate('/login', { replace: true })
-		}
-	}, [initialized, navigate])
+	// useEffect(() => {
+	// 	if (!initialized) {
+	// 		navigate('/login', { replace: true })
+	// 	}
+	// }, [initialized, navigate])
 
-	if (!initialized) {
-		return <Preloader />
-	}
+	// if (!initialized) {
+	// 	return <Preloader />
+	// }
 
 	return (
 		<div className={classes.App}>

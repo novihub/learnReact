@@ -1,15 +1,15 @@
+import { FilterType } from '../redux/users-reducer'
 import { GetItemsType, instance, ResponseType } from './api'
 
 export const usersAPI = {
 	getUsers(
 		currentPage: number,
 		pageSize: number,
-		term: string,
-		isFollowed: boolean | null
+		filter: FilterType
 	) {
 		return instance
 			.get<GetItemsType>(
-				`users?page=${currentPage}&count=${pageSize}&term=${term}&friend=${isFollowed}`
+				`users?page=${currentPage}&count=${pageSize}&term=${filter.term}&friend=${filter.isFollowed}`
 			)
 			.then(res => res.data)
 	},
