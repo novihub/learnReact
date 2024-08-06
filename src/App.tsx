@@ -1,19 +1,16 @@
-import React, { Suspense, lazy } from 'react'
-import { ConnectedProps, connect } from 'react-redux'
-import { Route, Routes } from 'react-router-dom'
-import classes from './App.module.css'
-import HeaderContainer from './components/Header/HeaderContainer'
-import Nav from './components/Nav/Nav'
+import {
+	MenuFoldOutlined,
+	MenuUnfoldOutlined,
+	ProfileOutlined,
+	UploadOutlined,
+	UserOutlined,
+	VideoCameraOutlined
+} from '@ant-design/icons'
+import { Button, Layout, Menu, theme } from 'antd'
+import React, { lazy, Suspense, useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom'
 import Preloader from './components/common/Preloader/Preloader'
-import { initializeApp } from './redux/app-reducer'
-import { AppStateType } from './redux/redux-store'
-
-interface OwnPropsType {
-	logout: () => Promise<void>
-	avatar: string | null
-	isAuth: boolean
-	login: string | null
-}
+import HeaderContainer from './components/Header/HeaderContainer'
 
 const DialogsContainer = lazy(
 	() => import('./components/Dialogs/DialogsContainer')
@@ -28,55 +25,88 @@ const SettingsContainer = lazy(
 	() => import('./components/Settings/SettingsContainer')
 )
 
-type PropsFromRedux = ConnectedProps<typeof connector>
+const { Header, Sider, Content } = Layout
 
-type Props = PropsFromRedux & OwnPropsType
-
-const App: React.FC<Props> = ({ initialized, initializeApp }) => {
-	// const navigate = useNavigate()
-
-	// useEffect(() => {
-	// 	startTransition(() => {
-	// 		initializeApp()
-	// 	})
-	// }, [initializeApp])
-
-	// useEffect(() => {
-	// 	if (!initialized) {
-	// 		navigate('/login', { replace: true })
-	// 	}
-	// }, [initialized, navigate])
-
-	// if (!initialized) {
-	// 	return <Preloader />
-	// }
+const App: React.FC = () => {
+	const [collapsed, setCollapsed] = useState(false)
+	const {
+		token: { colorBgContainer, borderRadiusLG }
+	} = theme.useToken()
 
 	return (
-		<div className={classes.App}>
-			<HeaderContainer />
-			<Nav />
-			<div className={classes.AppContent}>
-				<Suspense fallback={<Preloader />}>
-					<Routes>
-						<Route path='/profile/:userId' element={<ProfileContainer />} />
-						<Route path='/messages/*' element={<DialogsContainer />} />
-						<Route path='/users' element={<UsersPage />} />
-						<Route path='/music' element={<MusicContainer />} />
-						<Route path='/settings' element={<SettingsContainer />} />
-						<Route path='/login' element={<Login />} />
-					</Routes>
-				</Suspense>
-			</div>
-		</div>
+		<Layout style={{ height: '100vh', margin: 'auto'}}>
+			<Sider trigger={null} collapsible collapsed={collapsed}>
+				<Menu
+					style={{ marginTop: '100px' }}
+					theme='dark'
+					mode='inline'
+					defaultSelectedKeys={['1']}
+					items={[
+						{
+							key: '1',
+							icon: <ProfileOutlined />,
+							label: <Link to={`/profile/27248`}>Profile</Link>
+						},
+						{
+							key: '2',
+							icon: <VideoCameraOutlined />,
+							label: <Link to='/messages'>Messages</Link>
+						},
+						{
+							key: '3',
+							icon: <UserOutlined />,
+							label: <Link to='/users'>Users</Link>
+						},
+						{
+							key: '4',
+							icon: <UploadOutlined />,
+							label: <Link to='/music'>Music</Link>
+						},
+						{
+							key: '5',
+							icon: <UploadOutlined />,
+							label: <Link to='/settings'>Settings</Link>
+						}
+					]}
+				/>
+			</Sider>
+			<Layout>
+				<Header style={{ padding: 0, background: colorBgContainer }}>
+					<Button
+						type='text'
+						icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+						onClick={() => setCollapsed(!collapsed)}
+						style={{
+							fontSize: '16px',
+							width: 64,
+							height: 64
+						}}
+					/>
+					<HeaderContainer />
+				</Header>
+				<Content
+					style={{
+						margin: '24px 16px',
+						padding: 24,
+						minHeight: 280,
+						background: colorBgContainer,
+						borderRadius: borderRadiusLG
+					}}
+				>
+					<Suspense fallback={<Preloader />}>
+						<Routes>
+							<Route path='/profile/:userId' element={<ProfileContainer />} />
+							<Route path='/messages/*' element={<DialogsContainer />} />
+							<Route path='/users' element={<UsersPage />} />
+							<Route path='/music' element={<MusicContainer />} />
+							<Route path='/settings' element={<SettingsContainer />} />
+							<Route path='/login' element={<Login />} />
+						</Routes>
+					</Suspense>
+				</Content>
+			</Layout>
+		</Layout>
 	)
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-	initialized: state.app.initialized
-})
-
-const connector = connect(mapStateToProps, {
-	initializeApp
-})
-
-export default connector(App)
+export default App

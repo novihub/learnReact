@@ -16,7 +16,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
         saveProfile={props.saveProfile}
       />
       {/* MyPostsContainer should be connected to Redux and not need additional props here */}
-    <MyPostsContainer isOwner={props.isOwner} posts={[]}/>
+    {/* <MyPostsContainer isOwner={props.isOwner} posts={[]}/> */}
     </div>
   );
 };
