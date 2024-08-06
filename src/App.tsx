@@ -1,6 +1,6 @@
-import React, { Suspense, lazy, startTransition, useEffect } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Nav from './components/Nav/Nav'
