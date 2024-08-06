@@ -18,6 +18,8 @@ const DialogsContainer = lazy(
 const ProfileContainer = lazy(
 	() => import('./components/Profile/ProfileContainer')
 )
+
+const ChatPage = lazy(() => import('./pages/Chat/ChatPage'))
 const Login = lazy(() => import('./components/Login/Login'))
 const UsersPage = lazy(() => import('./components/Users/UsersPage'))
 const MusicContainer = lazy(() => import('./components/Music/MusicContainer'))
@@ -34,7 +36,7 @@ const App: React.FC = () => {
 	} = theme.useToken()
 
 	return (
-		<Layout style={{ height: '100vh', margin: 'auto'}}>
+		<Layout style={{ height: '100vh', margin: 'auto' }}>
 			<Sider trigger={null} collapsible collapsed={collapsed}>
 				<Menu
 					style={{ marginTop: '100px' }}
@@ -96,6 +98,7 @@ const App: React.FC = () => {
 					<Suspense fallback={<Preloader />}>
 						<Routes>
 							<Route path='/profile/:userId' element={<ProfileContainer />} />
+							<Route path='/chat' element={<ChatPage />} />
 							<Route path='/messages/*' element={<DialogsContainer />} />
 							<Route path='/users' element={<UsersPage />} />
 							<Route path='/music' element={<MusicContainer />} />
