@@ -12,6 +12,7 @@ import authReducer from './auth-reducer'
 import dialogsReducer from './dialogs-reducer'
 import profileReducer from './profile-reducer'
 import usersReducer from './users-reducer'
+import chatReducer from './chat-reducer'
 
 const rootReducer = combineReducers({
 	profilePage: profileReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
 	usersPage: usersReducer,
 	auth: authReducer,
 	form: formReducer,
-	app: appReducer
+	app: appReducer,
+	chat: chatReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>
