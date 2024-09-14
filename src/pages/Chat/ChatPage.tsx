@@ -1,5 +1,11 @@
 import { Avatar } from 'antd'
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, {
+	FC,
+	KeyboardEventHandler,
+	useEffect,
+	useRef,
+	useState
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	ChatMessageType,
@@ -8,6 +14,7 @@ import {
 	stopMessagesListening
 } from '../../redux/chat-reducer'
 import { AppStateType } from '../../redux/redux-store'
+import classes from './ChatPage.module.css'
 
 export interface ChatMessageAPIType {
 	message: string
@@ -76,10 +83,10 @@ const Messages: FC = () => {
 
 	return (
 		<div
-			style={{ height: '800px', overflowY: 'auto' }}
+			style={{ minHeight: '740px', maxHeight: '740px', overflowY: 'auto' }}
 			onScroll={scrollHandler}
 		>
-			{messages.map((m) => (
+			{messages.map(m => (
 				<Message key={m.id} message={m} />
 			))}
 			<div ref={messagesAnchorRef}></div>
@@ -92,7 +99,7 @@ const Message: FC<{ message: ChatMessageType }> = React.memo(({ message }) => {
 		<div style={{ margin: '10px 10px' }}>
 			<Avatar src={message.photo} />
 			<b>{message.userName}</b>
-			<p>{message.message}</p>
+			<p style={{ fontSize: '1rem' }}>{message.message}</p>
 			<br />
 		</div>
 	)
@@ -111,13 +118,26 @@ const AddMessageForm: FC = () => {
 		}
 	}
 
+	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = e => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			sendMessageHandler()
+		}
+	}
+
 	return (
-		<div>
+		<div className={classes.InputContainer}>
 			<textarea
+				className={classes.Textarea}
 				onChange={e => setMessage(e.currentTarget.value)}
+				onKeyDown={handleKeyPress}
 				value={message}
 			/>
-			<button disabled={status !== 'ready'} onClick={sendMessageHandler}>
+			<button
+				className={classes.Input}
+				disabled={status !== 'ready'}
+				onClick={sendMessageHandler}
+			>
 				Send
 			</button>
 		</div>

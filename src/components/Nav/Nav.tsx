@@ -7,6 +7,9 @@ import classes from './Nav.module.css'
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const Nav: React.FC<PropsFromRedux> = ({ userId }) => {
+
+	
+
 	return (
 		<div className={classes.Nav}>
 			<ul>

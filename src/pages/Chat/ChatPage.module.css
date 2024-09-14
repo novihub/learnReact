@@ -1,0 +1,13 @@
+.InputContainer {
+	display: flex;
+	height: 100px;
+}
+
+.Textarea {
+	width: 100%;
+	font-size: 2rem;
+}
+
+.Input {
+	width: 100px;
+}

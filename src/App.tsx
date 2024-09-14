@@ -8,9 +8,11 @@ import {
 } from '@ant-design/icons'
 import { Button, Layout, Menu, theme } from 'antd'
 import React, { lazy, Suspense, useState } from 'react'
+import { connect, ConnectedProps } from 'react-redux'
 import { Link, Route, Routes } from 'react-router-dom'
 import Preloader from './components/common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer'
+import { AppStateType } from './redux/redux-store'
 
 const DialogsContainer = lazy(
 	() => import('./components/Dialogs/DialogsContainer')
@@ -29,7 +31,9 @@ const SettingsContainer = lazy(
 
 const { Header, Sider, Content } = Layout
 
-const App: React.FC = () => {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const App: React.FC<PropsFromRedux> = ({ userId }) => {
 	const [collapsed, setCollapsed] = useState(false)
 	const {
 		token: { colorBgContainer, borderRadiusLG }
@@ -47,7 +51,7 @@ const App: React.FC = () => {
 						{
 							key: '1',
 							icon: <ProfileOutlined />,
-							label: <Link to={`/profile/27248`}>Profile</Link>
+							label: <Link to={`/profile/${userId}`}>Profile</Link>
 						},
 						{
 							key: '2',
@@ -112,4 +116,10 @@ const App: React.FC = () => {
 	)
 }
 
-export default App
+const mapStateToProps = (state: AppStateType) => ({
+	userId: state.auth.userId
+})
+
+const connector = connect(mapStateToProps)
+
+export default connector(App)
