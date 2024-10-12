@@ -102,8 +102,8 @@ const App: React.FC<PropsFromRedux> = ({ userId }) => {
 					<Suspense fallback={<Preloader />}>
 						<Routes>
 							<Route path='/profile/:userId' element={<ProfileContainer />} />
-							<Route path='/chat' element={<ChatPage />} />
-							<Route path='/messages/*' element={<DialogsContainer />} />
+							<Route path='/messages' element={<ChatPage />} />
+							{/* <Route path='/messages/*' element={<DialogsContainer />} /> */}
 							<Route path='/users' element={<UsersPage />} />
 							<Route path='/music' element={<MusicContainer />} />
 							<Route path='/settings' element={<SettingsContainer />} />

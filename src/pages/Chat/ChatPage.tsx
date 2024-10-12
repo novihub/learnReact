@@ -43,6 +43,15 @@ const Chat: FC = () => {
 		}
 	}, [])
 
+	const [message, setMessage] = useState('')
+
+	const sendMessageHandler = () => {
+		if (message.trim() !== '') {
+			dispatch(sendMessage(message))
+			setMessage('')
+		}
+	}
+
 	return (
 		<div>
 			{status === 'error' ? (
@@ -50,7 +59,11 @@ const Chat: FC = () => {
 			) : (
 				<>
 					<Messages />
-					<AddMessageForm />
+					<AddMessageForm
+						sendMessageHandler={sendMessageHandler}
+						message={message}
+						setMessage={setMessage}
+					/>
 				</>
 			)}
 		</div>
@@ -83,7 +96,7 @@ const Messages: FC = () => {
 
 	return (
 		<div
-			style={{ minHeight: '740px', maxHeight: '740px', overflowY: 'auto' }}
+			style={{ minHeight: '75vh', maxHeight: '75vh', overflowY: 'auto' }}
 			onScroll={scrollHandler}
 		>
 			{messages.map(m => (
@@ -105,18 +118,18 @@ const Message: FC<{ message: ChatMessageType }> = React.memo(({ message }) => {
 	)
 })
 
-const AddMessageForm: FC = () => {
-	const [message, setMessage] = useState('')
+type AddMessageFormProps = {
+	sendMessageHandler: () => void
+	message: any
+	setMessage: any
+}
 
+const AddMessageForm: FC<AddMessageFormProps> = ({
+	sendMessageHandler,
+	message,
+	setMessage
+}) => {
 	const status = useSelector((state: AppStateType) => state.chat.status)
-
-	const dispatch = useDispatch()
-	const sendMessageHandler = () => {
-		if (message.trim() !== '') {
-			dispatch(sendMessage(message))
-			setMessage('')
-		}
-	}
 
 	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = e => {
 		if (e.key === 'Enter') {
